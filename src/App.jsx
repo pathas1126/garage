@@ -4,16 +4,49 @@ import { Button } from "./components/";
 function App() {
   return (
     <div className="App">
-      <Button color="primary">확인</Button>
-      <Button color="secondary">확인</Button>
-      <Button color="teritiaty">확인</Button>
-      <div>
-        <Button size="big" color="primary">
-          확인
+      {/* primary 색상 버튼, 크기 별로 확인 */}
+      <div style={{ marginBottom: "1rem" }}>
+        <Button color="primary" size="big">
+          BUTTON
         </Button>
-        <Button color="secondary">확인</Button>
-        <Button size="small" color="teritiaty">
-          확인
+        <Button color="primary">BUTTON</Button>
+        <Button color="primary" size="small">
+          BUTTON
+        </Button>
+      </div>
+      {/* secondary 색상 버튼, 크기 별로 확인 */}
+      <div style={{ marginBottom: "1rem" }}>
+        <Button color="secondary" size="big">
+          BUTTON
+        </Button>
+        <Button color="secondary">BUTTON</Button>
+
+        <Button color="secondary" size="small">
+          BUTTON
+        </Button>
+      </div>
+      {/* teritiaty 색상 버튼, 크기 별로 확인 */}
+      <div style={{ marginBottom: "1rem" }}>
+        <Button color="teritiaty" size="big">
+          BUTTON
+        </Button>
+        <Button color="teritiaty">BUTTON</Button>
+        <Button color="teritiaty" size="small">
+          BUTTON
+        </Button>
+      </div>
+      <div style={{ marginBottom: "1rem" }}>
+        <Button variation="outline" size="big">
+          BUTTON
+        </Button>
+        <Button variation="outline">BUTTON</Button>
+        <Button variation="outline" size="small">
+          BUTTON
+        </Button>
+      </div>
+      <div style={{ marginBottom: "1rem" }}>
+        <Button variation="outline" color="teritiaty" size="big" width="100%">
+          BUTTON
         </Button>
       </div>
     </div>
