@@ -1,6 +1,7 @@
 /**  @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
+import { COLORS } from "../../assets/colors";
 
 // 버튼 컴포넌트
 const Button = ({
@@ -11,7 +12,6 @@ const Button = ({
   variation,
   width,
 }) => {
-  console.log(color);
   return (
     <button css={setStyle({ color, size, variation, width })} onClick={onClick}>
       {children}
@@ -21,13 +21,6 @@ const Button = ({
 
 // 스타일 설정 함수
 const setStyle = ({ color, size, variation, width }) => {
-  // 색상 객체
-  const COLORS = {
-    primary: "#774836",
-    secondary: "#82363A",
-    teritiaty: "#2E2A39",
-  };
-
   // 사이즈 객체
   const SIZES = {
     small: css`
@@ -52,7 +45,17 @@ const setStyle = ({ color, size, variation, width }) => {
     outline: css`
       border: 1px solid ${COLORS[color]};
       color: ${COLORS[color]};
-      background: #fff;
+      background: transparent;
+      &:active {
+        background: ${COLORS[color]};
+        color: white;
+        transition: 0.4s;
+      }
+    `,
+    noborder: css`
+      border: none;
+      color: ${COLORS[color]};
+      background: transparent;
       &:active {
         background: ${COLORS[color]};
         color: white;
@@ -73,13 +76,14 @@ const setStyle = ({ color, size, variation, width }) => {
     color: white;
     font-size: 1.3rem;
     border-radius: 0.5rem;
+    cursor: pointer;
 
     /* 버튼 클리 시 스타일 */
     &:active {
       transform: scale(0.98);
-      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12),
-        0 0 2px 2px rgba(0, 0, 0, 0.12), 0 0 4px 4px rgba(0, 0, 0, 0.12),
-        0 0 8px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 2px 2px rgba(255, 255, 255, 0.12),
+        0 0 4px 4px rgba(255, 255, 255, 0.12);
     }
 
     & + button {
