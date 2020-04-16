@@ -1,15 +1,14 @@
 import React from "react";
 import { PageTemplate } from "../components";
-import { SalesContainer } from "../containers";
 
-const Sales = () => {
+const MainPage = () => {
   return (
     <>
       <PageTemplate>
-        <SalesContainer />
+        <h1>MAIN PAGE</h1>
       </PageTemplate>
     </>
   );
 };
 
-export default Sales;
+export default MainPage;

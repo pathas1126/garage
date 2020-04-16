@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "../components";
 
-const CardContainer = ({ data, fixDetail }) => {
+const CardContainer = ({ data }) => {
   return (
     <>
       {data &&
@@ -21,7 +21,6 @@ const CardContainer = ({ data, fixDetail }) => {
             deal_Location={v.deal_Location}
             item_Name={v.item_Name}
             item_Picture={v.item_Picture}
-            onClick={() => fixDetail(v.item_Number)}
           />
         ))}
     </>

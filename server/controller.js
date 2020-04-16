@@ -1,10 +1,20 @@
+const model = require("./model");
+
 module.exports = {
-  api: {
-    getData: (req, res) => {
-      console.log("컨트롤러 연결");
+  api: {},
+  sales: {
+    items: (req, res) => {
+      model.sales.items((result) => {
+        if (result) {
+          res.send(result);
+        }
+      });
     },
-    addData: (req, res) => {
-      console.log(req.body);
+    detail: (req, res) => {
+      const { item_Id } = req.body;
+      model.sales.detail(item_Id, (result) => {
+        if (result) res.send(result);
+      });
     },
   },
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { PageTemplate } from "../components";
 
-const Contact = () => {
+const ContactPage = () => {
   return (
     <>
       <PageTemplate>
@@ -11,4 +11,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPage;

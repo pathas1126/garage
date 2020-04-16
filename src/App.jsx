@@ -1,7 +1,16 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Global, css } from "@emotion/core";
-import { Main, Sales, Enjoy, QnA, MyPage, Login, Contact } from "./pages";
+import {
+  MainPage,
+  SalesPage,
+  EnjoyPage,
+  QnAPage,
+  MyPage,
+  LoginPage,
+  ContactPage,
+  DetailPage,
+} from "./pages";
 
 function App() {
   return (
@@ -17,14 +26,16 @@ function App() {
         `}
       />
       {/* ROUTE 설정 */}
-      <Route exact path="/" component={Main} />
-      <Route exact path="/sales" component={Sales} />
-      {/* <Route path="/sales/detail/:id" component={Detail} /> */}
-      <Route path="/enjoy" component={Enjoy} />
-      <Route path="/qna" component={QnA} />
+      <Route exact path="/" component={MainPage} />
+      <Switch>
+        <Route path="/sales/detail/:id" component={DetailPage} />
+        <Route path="/sales" component={SalesPage} />
+      </Switch>
+      <Route path="/enjoy" component={EnjoyPage} />
+      <Route path="/qna" component={QnAPage} />
       <Route path="/mypage" component={MyPage} />
-      <Route path="/login" component={Login} />
-      <Route path="/contact" component={Contact} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/contact" component={ContactPage} />
     </>
   );
 }

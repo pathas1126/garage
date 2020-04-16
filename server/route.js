@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 const controller = require("./controller");
 
-router.get("/get/data", controller.api.getData);
+router.get("/sales/items", controller.sales.items);
 
-router.post("/add/data", controller.api.addData);
-router.post("/modify/data");
-router.post("/delete/data");
+router.post("/sales/detail", controller.sales.detail);
 
 module.exports = router;

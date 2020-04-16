@@ -1,7 +1,7 @@
 import React from "react";
 import { PageTemplate } from "../components";
 
-const Enjoy = () => {
+const EnjoyPage = () => {
   return (
     <>
       <PageTemplate>
@@ -11,4 +11,4 @@ const Enjoy = () => {
   );
 };
 
-export default Enjoy;
+export default EnjoyPage;

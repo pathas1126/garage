@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import { IMAGES } from "../../assets/images";
 import { Button } from "../";
+import { Link } from "react-router-dom";
 
 const Card = ({
   item_Number,
@@ -32,9 +33,9 @@ const Card = ({
         </div>
         <div css={bottomStyle}>
           <span>{item_Status}</span>
-          <Button variation="noborder" onClick={onClick}>
-            더 보기
-          </Button>
+          <Link to={`/sales/detail/${item_Number}`}>
+            <Button variation="noborder">더 보기</Button>
+          </Link>
         </div>
       </div>
     </article>
