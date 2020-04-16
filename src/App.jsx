@@ -18,7 +18,8 @@ function App() {
       />
       {/* ROUTE 설정 */}
       <Route exact path="/" component={Main} />
-      <Route path="/sales" component={Sales} />
+      <Route exact path="/sales" component={Sales} />
+      {/* <Route path="/sales/detail/:id" component={Detail} /> */}
       <Route path="/enjoy" component={Enjoy} />
       <Route path="/qna" component={QnA} />
       <Route path="/mypage" component={MyPage} />

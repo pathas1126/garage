@@ -7,7 +7,6 @@ const Sales = () => {
     <>
       <PageTemplate>
         <SalesContainer />
-        <h1>SALES PAGE</h1>
       </PageTemplate>
     </>
   );
