@@ -2,9 +2,13 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.get("/", (req, res) => {
-  res.send("Welcome!");
-});
+const bodyParser = require("body-parser");
+
+const router = require("./route");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use("/", router);
 
 app.listen(PORT, () => {
   console.log(`Server on: http://localhos:${PORT}/`);
