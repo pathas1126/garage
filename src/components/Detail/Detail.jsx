@@ -17,12 +17,11 @@ const Detail = ({
   deal_Location,
   item_Name,
   item_Picture,
-  exitDetail,
 }) => {
   return (
     <section css={detailWrapperStyle}>
       <article>
-        <img src={IMAGES.violin} width="100%" height="100%" alt="" />
+        <img src={IMAGES.violin} alt="" />
       </article>
       <article css={headerStyle}>
         <h1>{item_Name}</h1>
@@ -36,7 +35,7 @@ const Detail = ({
         <h2>가격: {item_Price}</h2>
         <p>{item_Detail}</p>
       </article>
-      <Button onClick={exitDetail} variation="outline">
+      <Button onClick={() => window.history.go(-1)} variation="outline">
         돌아가기
       </Button>
     </section>
@@ -44,14 +43,18 @@ const Detail = ({
 };
 
 const detailWrapperStyle = css`
-  margin: 1rem;
+  margin: 1rem auto;
   padding-bottom: 1rem;
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  img {
+    width: 100%;
+    height: 100%;
+  }
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
     transition: 0.3s;
