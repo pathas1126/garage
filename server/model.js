@@ -30,5 +30,9 @@ module.exports = {
           throw err;
         });
     },
+    write: (data, callback) => {
+      firestore.collection("items").add({ data });
+      callback(true);
+    },
   },
 };

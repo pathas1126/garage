@@ -28,11 +28,28 @@ const Detail = ({
         <h2>{item_Status}</h2>
       </article>
       <article css={infoStyle}>
-        <h2>판매자: {item_Writer}</h2>
-        <h2>제조사: {item_Brand_model}</h2>
-        <h2>판매자 카카오톡: {sales_KakaoId}</h2>
-        <h2>거래 위치: {deal_Location}</h2>
-        <h2>가격: {item_Price}</h2>
+        <table>
+          <tr>
+            <td>판매자</td>
+            <td>{item_Writer}</td>
+          </tr>
+          <tr>
+            <td>제조사</td>
+            <td>{item_Brand_model}</td>
+          </tr>
+          <tr>
+            <td>판매자 카카오톡ID</td>
+            <td>{sales_KakaoId}</td>
+          </tr>
+          <tr>
+            <td>거래 위치</td>
+            <td>{deal_Location}</td>
+          </tr>
+          <tr>
+            <td>가격</td>
+            <td>{item_Price}</td>
+          </tr>
+        </table>
         <p>{item_Detail}</p>
       </article>
       <Button onClick={() => window.history.go(-1)} variation="outline">
@@ -85,11 +102,13 @@ const infoStyle = css`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  h2 {
+  td {
     margin: 0;
     margin-top: 0.4rem;
-    font-size: 1.2rem;
     font-weight: 400;
+  }
+  table > tr > td + td {
+    padding-right: 8rem;
   }
 `;
 

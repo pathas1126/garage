@@ -1,35 +1,47 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
+import React from "react";
 
-const Input = ({ placeholder }) => {
+const Input = ({
+  placeholder,
+  width,
+  autoFocus,
+  name,
+  value,
+  onChange,
+  type = "text",
+}) => {
   return (
     <input
-      type="text"
-      css={setStyle()}
+      type={type}
+      css={setStyle({ type, width })}
+      name={name}
+      value={value}
       placeholder={placeholder}
-      autofocus
+      autoFocus={autoFocus}
+      onChange={onChange}
     ></input>
   );
 };
 
-const setStyle = () => {
-  const defaultStyle = css`
-    margin: 0.2rem auto;
-    padding: 0.8rem 0 0.2rem 0;
+const setStyle = ({ type, width }) => {
+  const TYPES = {
+    text: css`
+      padding: 0.8rem 0 0.2rem 0;
+      width: 12rem;
+      height: 1.4rem;
+      border: none;
+      border-bottom: 1px solid #0c0c0c;
+      &:focus {
+        transform: scale(1.05);
+        transition: 0.1s ease-out;
+      }
+      & + & {
+        margin-top: 1rem;
+      }
+    `,
+  };
 
-    width: 12rem;
-    height: 1.4rem;
-    border: none;
-    border-bottom: 1px dashed;
-    &:focus {
-      transform: scale(1.05);
-      transition: 0.1s ease-out;
-    }
-    & + & {
-      margin-top: 1rem;
-    }
-  `;
-
-  return [defaultStyle];
+  return [TYPES[type], { width }];
 };
-export default Input;
+export default React.memo(Input);

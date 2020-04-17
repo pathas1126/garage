@@ -10,6 +10,7 @@ export { Modal } from "./Modal";
 export { Input } from "./Input";
 export { Card } from "./Card";
 export { Loader } from "./Loader";
+export { Editor } from "./Editor";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";
