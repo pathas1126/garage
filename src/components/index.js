@@ -9,6 +9,7 @@ export { Button } from "./Button";
 export { Modal } from "./Modal";
 export { Input } from "./Input";
 export { Card } from "./Card";
+export { Loader } from "./Loader";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";

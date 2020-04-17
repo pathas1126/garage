@@ -14,13 +14,15 @@ const Input = ({ placeholder }) => {
 
 const setStyle = () => {
   const defaultStyle = css`
-    padding: 0.2rem;
+    margin: 0.2rem auto;
+    padding: 0.8rem 0 0.2rem 0;
+
     width: 12rem;
     height: 1.4rem;
     border: none;
     border-bottom: 1px dashed;
     &:focus {
-      transform: scaleX(1.05);
+      transform: scale(1.05);
       transition: 0.1s ease-out;
     }
     & + & {

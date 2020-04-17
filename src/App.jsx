@@ -10,6 +10,7 @@ import {
   LoginPage,
   ContactPage,
   DetailPage,
+  WritePage,
 } from "./pages";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Route exact path="/" component={MainPage} />
       <Switch>
         <Route path="/sales/detail/:id" component={DetailPage} />
+        <Route path="/sales/write" component={WritePage} />
         <Route path="/sales" component={SalesPage} />
       </Switch>
       <Route path="/enjoy" component={EnjoyPage} />

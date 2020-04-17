@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Detail } from "../components";
+import { Detail, Loader } from "../components";
 import { fetchData } from "../library";
 
 const DetailContainer = ({ data, item_Id }) => {
@@ -25,7 +25,7 @@ const DetailContainer = ({ data, item_Id }) => {
 
   return (
     <>
-      {loading && <h1>Loading</h1>}
+      {loading && <Loader />}
       {!loading && (
         <Detail
           item_Number={item.item_Number}

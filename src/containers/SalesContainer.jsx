@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../library";
 import { CardContainer } from "./index";
+import { Loader } from "../components";
 
 const SalesContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,6 @@ const SalesContainer = () => {
   useEffect(() => {
     setLoading(true);
     fetchData({ method: "GET", url: "/sales/items" }).then((data) => {
-      console.log(data);
       setItems((prevItems) => prevItems.concat(data.data));
       setLoading(false);
     });
@@ -23,7 +23,7 @@ const SalesContainer = () => {
         justifyContent: "center",
       }}
     >
-      {loading && <h1>LOADING...</h1>}
+      {loading && <Loader />}
       {!loading && <CardContainer data={items} />}
     </section>
   );
