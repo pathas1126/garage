@@ -63,7 +63,7 @@ const LoginContainer = () => {
             placeholder="PW를 입력하세요"
             required={true}
           ></Input>
-          <Button variation="outline" color="teritiaty">
+          <Button variation="outline" color="teritiaty" type="submit">
             로그인
           </Button>
         </form>
