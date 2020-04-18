@@ -72,7 +72,7 @@ const WriteContainer = () => {
 
     fetchData({
       method: "POST",
-      data: { data },
+      data: { ...data, item_Price: Number(item_Price) },
       url: "/sales/write",
     }).then((res) => {
       if (res.data) {

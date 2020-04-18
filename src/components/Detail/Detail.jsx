@@ -21,7 +21,7 @@ const Detail = ({
   return (
     <section css={detailWrapperStyle}>
       <article>
-        <img src={IMAGES.violin} alt="" />
+        <img src={item_Picture} alt="" />
       </article>
       <article css={headerStyle}>
         <h1>{item_Name}</h1>
