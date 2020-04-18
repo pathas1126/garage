@@ -11,9 +11,14 @@ const Button = ({
   size = "medium",
   variation,
   width,
+  type = "button",
 }) => {
   return (
-    <button css={setStyle({ color, size, variation, width })} onClick={onClick}>
+    <button
+      css={setStyle({ color, size, variation, width })}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

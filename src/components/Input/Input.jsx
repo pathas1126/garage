@@ -10,7 +10,7 @@ const Input = ({
   value,
   onChange,
   type = "text",
-  required,
+  required = false,
 }) => {
   return (
     <input
@@ -21,7 +21,7 @@ const Input = ({
       placeholder={placeholder}
       autoFocus={autoFocus}
       onChange={onChange}
-      required
+      required={required}
     ></input>
   );
 };

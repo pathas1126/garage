@@ -31,7 +31,6 @@ const WriteContainer = () => {
     item_Price,
     item_Brand_model,
     item_Sort,
-    item_Writer,
     item_Detail,
   } = post;
 
@@ -67,12 +66,18 @@ const WriteContainer = () => {
   };
 
   const onSubmit = (e) => {
-    // 데이터 전송
+    e.stopPropagation();
+    const user_Id = sessionStorage.getItem("user_Id");
     const data = post;
 
     fetchData({
       method: "POST",
-      data: { ...data, item_Price: Number(item_Price) },
+      data: {
+        ...data,
+        user_Id,
+        item_Price: Number(item_Price),
+        item_Writer: user_Id,
+      },
       url: "/sales/write",
     }).then((res) => {
       if (res.data) {
@@ -97,7 +102,7 @@ const WriteContainer = () => {
 
   return (
     <section css={WriteContainerWrapper}>
-      <form onSubmit={onSubmit} css={formContainerWrapper}>
+      <form css={formContainerWrapper} onSubmit={onSubmit}>
         <table>
           <tbody>
             <tr>
@@ -203,18 +208,6 @@ const WriteContainer = () => {
               </td>
             </tr>
             <tr>
-              <td>작성자</td>
-              <td>
-                <Input
-                  name="item_Writer"
-                  width="80%"
-                  value={item_Writer}
-                  onChange={setValues}
-                  placeholder="작성자를 입력해 주세요"
-                />
-              </td>
-            </tr>
-            <tr>
               <td>이미지</td>
               <td>
                 <input type="file" onChange={getImage} />
@@ -235,25 +228,13 @@ const WriteContainer = () => {
           </tbody>
         </table>
         <textarea
-          style={{
-            padding: "1rem",
-            margin: "3rem auto",
-            width: "90%",
-            height: "14rem",
-            boxSizing: "border-box",
-            border: "1px solid black",
-            borderRadius: "0.2rem",
-            resize: "none",
-          }}
           name="item_Detail"
           value={item_Detail}
           onChange={setValues}
         ></textarea>
-        <div css={ButtonWrapper}>
-          <Button width="100%" variation="outline">
-            작성 하기
-          </Button>
-        </div>
+        <Button width="100%" variation="outline" type="submit">
+          작성 하기
+        </Button>
       </form>
     </section>
   );
@@ -279,18 +260,23 @@ const formContainerWrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  textarea {
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 90%;
+    height: 14rem;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    resize: none;
+  }
 `;
 
 const imageWrapper = css`
   width: 350px;
-
   img {
     margin-top: 1rem;
   }
-`;
-
-const ButtonWrapper = css`
-  margin-top: 1rem;
 `;
 
 export default React.memo(WriteContainer);

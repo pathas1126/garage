@@ -17,6 +17,7 @@ const upload = multer({
   limits: { fileSize: 10000000 },
 });
 
+// 상품 페이지 관련 라우트
 router.get("/sales/items", controller.sales.items);
 
 router.post("/sales/detail", controller.sales.detail);
@@ -29,5 +30,8 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
 });
 
 router.post("/sales/write", controller.sales.write);
+
+// 로그인 페이지 라우트
+router.post("/users/user", controller.users.user);
 
 module.exports = router;

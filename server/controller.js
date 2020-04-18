@@ -7,6 +7,7 @@ module.exports = {
       console.log(req.body);
     },
   },
+  // 상품 페이지 API
   sales: {
     items: (req, res) => {
       model.sales.items((result) => {
@@ -22,9 +23,17 @@ module.exports = {
       });
     },
     write: (req, res) => {
-      console.log(req.body);
       const data = req.body;
       model.sales.write(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+  },
+  // 로그인 페이지 API
+  users: {
+    user: (req, res) => {
+      const data = req.body;
+      model.users.user(data, (result) => {
         if (result) res.send(result);
       });
     },
