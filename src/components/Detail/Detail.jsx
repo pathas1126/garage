@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { IMAGES } from "../../assets/images";
 import { Button } from "../Button";
+import { COLORS } from "../../assets/colors";
 
 const Detail = ({
   item_Number,
@@ -20,15 +20,12 @@ const Detail = ({
 }) => {
   return (
     <section css={detailWrapperStyle}>
-      <article>
-        <img src={item_Picture} alt="" />
-      </article>
-      <article css={headerStyle}>
-        <h1>{item_Name}</h1>
-        <h2>{item_Status}</h2>
-      </article>
-      <article css={infoStyle}>
-        <table>
+      <img src={item_Picture} alt="" />
+      <header css={headerStyle}>
+        <h1>{item_Name}</h1> <span>{item_Status}</span>
+      </header>
+      <table css={infoStyle}>
+        <tbody>
           <tr>
             <td>판매자</td>
             <td>{item_Writer}</td>
@@ -38,7 +35,7 @@ const Detail = ({
             <td>{item_Brand_model}</td>
           </tr>
           <tr>
-            <td>판매자 카카오톡ID</td>
+            <td>카카오톡ID</td>
             <td>{sales_KakaoId}</td>
           </tr>
           <tr>
@@ -49,9 +46,9 @@ const Detail = ({
             <td>가격</td>
             <td>{item_Price}</td>
           </tr>
-        </table>
-        <p>{item_Detail}</p>
-      </article>
+        </tbody>
+      </table>
+      <p css={detailStyle}>{item_Detail}</p>
       <Button onClick={() => window.history.go(-1)} variation="outline">
         돌아가기
       </Button>
@@ -62,15 +59,17 @@ const Detail = ({
 const detailWrapperStyle = css`
   margin: 1rem auto;
   padding-bottom: 1rem;
-  width: 90%;
+  width: 50%;
+  min-width: 25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  color: ${COLORS.teritiaty};
   img {
-    width: 100%;
-    height: 100%;
+    padding: 2rem;
+    width: 80%;
   }
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
@@ -79,37 +78,36 @@ const detailWrapperStyle = css`
 `;
 
 const headerStyle = css`
-  width: 95%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  h1 {
-    margin: 0;
-    font-size: 1.6rem;
-    font-weight: 400;
-  }
-  h2 {
-    margin: 0;
-    margin-top: 0.4rem;
-    font-size: 1.3rem;
-    font-weight: 400;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid ${COLORS.primary};
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  span {
+    background: ${COLORS.secondary};
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+    color: white;
   }
 `;
 
 const infoStyle = css`
-  margin-top: 1rem;
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  td {
-    margin: 0;
-    margin-top: 0.4rem;
-    font-weight: 400;
-  }
-  table > tr > td + td {
-    padding-right: 8rem;
+  width: 80%;
+  padding: 0.3rem;
+  border: 1px solid ${COLORS.primary};
+  border-radius: 0.3rem;
+  tr {
+    line-height: 2rem;
   }
 `;
 
+const detailStyle = css`
+  width: 80%;
+  padding: 0.3rem;
+  border: 1px solid ${COLORS.primary};
+  border-radius: 0.3rem;
+`;
 export default Detail;

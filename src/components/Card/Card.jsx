@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
 import { Button } from "../";
 import { Link } from "react-router-dom";
+import { COLORS } from "../../assets/colors";
 
 const Card = ({
   item_Number,
@@ -21,31 +22,39 @@ const Card = ({
   onClick,
 }) => {
   return (
-    <article css={defaultStyle}>
+    <section css={defaultStyle}>
       <div css={[imageWrapper]}>
-        <img src={`../..${item_Picture}`} alt="" width="100%" height="100%" />
+        <img src={item_Picture} alt="" width="100%" height="100%" />
       </div>
-      <div css={infoWrapper}>
+      <article css={bodyStyle}>
         <div css={headerStyle}>
           <h1>{item_Name}</h1>
-          <h2>{item_Brand_model}</h2>
+          <span>{item_Status}</span>
+        </div>
+        <div css={infoStyle}>
+          <fieldset>
+            <legend>본문 내용</legend>
+            <p>{item_Detail.slice(0, 150)}...</p>
+          </fieldset>
         </div>
         <div css={bottomStyle}>
-          <span>{item_Status}</span>
           <Link to={`/sales/detail/${item_Number}`}>
             <Button variation="noborder">더 보기</Button>
           </Link>
         </div>
-      </div>
-    </article>
+      </article>
+    </section>
   );
 };
 
 const defaultStyle = css`
   margin: 0.5rem;
   width: 23rem;
-  display: inline-block;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
@@ -61,37 +70,55 @@ const imageWrapper = css`
   justify-content: center;
 `;
 
-const infoWrapper = css`
+const bodyStyle = css`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const headerStyle = css`
-  width: 90%;
+  width: 95%;
   display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding-left: 1rem;
+  align-items: center;
+  justify-content: space-between;
   h1 {
-    margin: 0;
+    margin: 0.5rem;
     font-size: 1.6rem;
     font-weight: 400;
   }
-  h2 {
-    margin: 0;
-    margin-top: 0.4rem;
-    font-size: 1.3rem;
-    font-weight: 400;
+  span {
+    background: ${COLORS.secondary};
+    padding: 0.4rem;
+    margin-right: 0.5rem;
+    border-radius: 0.2rem;
+    color: white;
+  }
+`;
+
+const infoStyle = css`
+  width: 90%;
+  fieldset {
+    border: 1px solid ${COLORS.primary};
+  }
+  fieldset > legend {
+    background: ${COLORS.primary};
+    padding: 0.2rem;
+    margin-right: 0.5rem;
+    border-radius: 0.2rem;
+    color: white;
+  }
+  p {
+    margin: 0.4rem 0 0 0;
   }
 `;
 
 const bottomStyle = css`
   display: flex;
+  justify-content: flex-end;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  span {
-    padding-left: 1rem;
-  }
   a {
     text-decoration: none;
   }
