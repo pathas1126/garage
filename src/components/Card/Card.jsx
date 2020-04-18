@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import PropTypes from "prop-types";
-import { IMAGES } from "../../assets/images";
 import { Button } from "../";
 import { Link } from "react-router-dom";
 
@@ -24,7 +23,7 @@ const Card = ({
   return (
     <article css={defaultStyle}>
       <div css={[imageWrapper]}>
-        <img src={IMAGES.violin} alt="" width="100%" height="100%" />
+        <img src={`../..${item_Picture}`} alt="" width="100%" height="100%" />
       </div>
       <div css={infoWrapper}>
         <div css={headerStyle}>

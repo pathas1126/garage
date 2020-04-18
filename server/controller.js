@@ -1,7 +1,5 @@
 const model = require("./model");
 
-
-
 module.exports = {
   api: {},
   tmp: {
@@ -24,8 +22,8 @@ module.exports = {
       });
     },
     write: (req, res) => {
-      console.log(req.body);
-      const data = req.body;
+      console.log(req.body.data);
+      const data = req.body.data;
       model.sales.write(data, (result) => {
         if (result) res.send(result);
       });

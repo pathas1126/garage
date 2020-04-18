@@ -18,6 +18,8 @@ const WriteContainer = () => {
     item_Writer: "",
     item_Detail: "",
     item_Number: Date.now(),
+    item_Picture: "",
+    user_Id: "",
   });
 
   const {
@@ -37,7 +39,6 @@ const WriteContainer = () => {
     fileName: "",
     filePath: "",
   });
-  const [content, setContent] = useState("");
 
   const setValues = (e) => {
     const { value, name } = e.target;
@@ -45,17 +46,21 @@ const WriteContainer = () => {
   };
 
   const getImage = (e) => {
-    setContent(e.target.files[0]);
-    e.stopPropagation();
+    const imgFile = e.target.files[0];
+
     const formData = new FormData();
-    formData.append("img", content);
+    formData.append("img", imgFile);
 
     fetchData({ method: "POST", data: formData, url: "/sales/image" }).then(
       (res) => {
         if (res) {
           console.log(res);
           const { fileName } = res.data;
-          setUploadedImg({ fileName, filePath: `/img/${fileName}` });
+          setUploadedImg({
+            fileName,
+            filePath: `/images/${fileName}`,
+          });
+          setPost({ ...post, item_Picture: `/images/${fileName}` });
         }
       }
     );
@@ -82,9 +87,10 @@ const WriteContainer = () => {
           item_Sort: "",
           item_Writer: "",
           item_Detail: "",
+          item_Picture: "",
         });
-        // alert("글이 성공적으로 작성되었습니다.");
-        // window.location.href = "/sales";
+        alert("글이 성공적으로 작성되었습니다.");
+        window.location.href = "/sales";
       }
     });
   };
@@ -200,14 +206,19 @@ const WriteContainer = () => {
                 <input type="file" onChange={getImage} />
               </td>
             </tr>
-            {uploadedImg.fileName && (
+            {uploadedImg.fileName ? (
               <tr>
                 <td colSpan="2">
-                  <img src={uploadedImg.filePath} alt="productImage" />
+                  <img
+                    src={uploadedImg.filePath}
+                    alt="productImage"
+                    width="50rem"
+                    hieght="50rem"
+                  />
                 </td>
                 <td></td>
               </tr>
-            )}
+            ) : null}
           </tbody>
         </table>
         <textarea

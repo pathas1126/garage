@@ -31,7 +31,7 @@ module.exports = {
         });
     },
     write: (data, callback) => {
-      firestore.collection("items").add({ data });
+      firestore.collection("items").add({ ...data });
       callback(true);
     },
   },
