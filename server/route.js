@@ -32,6 +32,9 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
 router.post("/sales/write", controller.sales.write);
 
 // 로그인 페이지 라우트
-router.post("/users/user", controller.users.user);
+router.post("/users/login", controller.users.login);
+
+// 회원가입 라우트
+router.post("/users/signup", controller.users.signup);
 
 module.exports = router;

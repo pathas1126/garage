@@ -26,9 +26,15 @@ module.exports = {
   },
   // 로그인 페이지 API
   users: {
-    user: (req, res) => {
+    login: (req, res) => {
       const data = req.body;
-      model.users.user(data, (result) => {
+      model.users.login(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    signup: (req, res) => {
+      const data = req.body;
+      model.users.signup(data, (result) => {
         if (result) res.send(result);
       });
     },

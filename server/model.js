@@ -38,7 +38,7 @@ module.exports = {
   },
   // 로그인 페이지 API
   users: {
-    user: (user_Data, callback) => {
+    login: (user_Data, callback) => {
       const { user_Id_FF, user_Password_FF } = user_Data;
       firestore
         .collection("users")
@@ -67,6 +67,10 @@ module.exports = {
         .catch((err) => {
           throw err;
         });
+    },
+    signup: (data, callback) => {
+      firestore.collection("users").add(data);
+      callback(true);
     },
   },
 };

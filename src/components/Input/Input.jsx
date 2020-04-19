@@ -14,6 +14,7 @@ const Input = ({
 }) => {
   return (
     <input
+      id={name}
       type={type}
       css={setStyle({ type, width })}
       name={name}

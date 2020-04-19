@@ -7,3 +7,4 @@ export { default as LoginPage } from "./LoginPage";
 export { default as ContactPage } from "./ContactPage";
 export { default as DetailPage } from "./DetailPage";
 export { default as WritePage } from "./WritePage";
+export { default as SignUpPage } from "./SingUpPage";

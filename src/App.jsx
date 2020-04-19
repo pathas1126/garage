@@ -12,6 +12,7 @@ import {
   ContactPage,
   DetailPage,
   WritePage,
+  SignUpPage,
 } from "./pages";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/qna" component={QnAPage} />
         <Route path="/mypage" component={MyPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignUpPage} />
         <Route path="/contact" component={ContactPage} />
       </LoginProvider>
     </>

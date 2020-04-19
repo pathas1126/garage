@@ -4,6 +4,7 @@ import { jsx, css } from "@emotion/core";
 import { Input, Button } from "../components";
 import { fetchData } from "../library";
 import { LoginContext } from "../store";
+import { Link } from "react-router-dom";
 
 const LoginContainer = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -22,7 +23,7 @@ const LoginContainer = () => {
   const login = (e) => {
     e.preventDefault();
     const loginData = loginInfo;
-    fetchData({ method: "POST", url: "/users/user", data: loginData })
+    fetchData({ method: "POST", url: "/users/login", data: loginData })
       .then((res) => {
         const { data } = res;
         if (data.success) {
@@ -63,9 +64,15 @@ const LoginContainer = () => {
             placeholder="PW를 입력하세요"
             required={true}
           ></Input>
-          <Button variation="outline" color="teritiaty" type="submit">
+          <Button
+            variation="outline"
+            color="teritiaty"
+            type="submit"
+            width="100%"
+          >
             로그인
           </Button>
+          <Link to="/signup">회원가입</Link>
         </form>
       </article>
     </section>
@@ -80,6 +87,10 @@ const loginWrapper = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const headerWrapper = css``;
