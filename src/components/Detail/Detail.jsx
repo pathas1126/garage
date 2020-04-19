@@ -31,6 +31,10 @@ const Detail = ({
             <td>{item_Writer}</td>
           </tr>
           <tr>
+            <td>악기 종류</td>
+            <td>{item_Sort}</td>
+          </tr>
+          <tr>
             <td>제조사</td>
             <td>{item_Brand_model}</td>
           </tr>
@@ -44,7 +48,7 @@ const Detail = ({
           </tr>
           <tr>
             <td>가격</td>
-            <td>{item_Price}</td>
+            <td>{item_Price} 원</td>
           </tr>
         </tbody>
       </table>

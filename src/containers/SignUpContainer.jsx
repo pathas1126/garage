@@ -1,19 +1,27 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import { useState } from "react";
 import { jsx, css } from "@emotion/core";
-import { Button, Input } from "../components";
+import { Button, Input, Form } from "../components";
 import { COLORS } from "../assets/colors";
 import { fetchData } from "../library";
+import { Label } from "../components/Label";
 
 const SignUpContainer = () => {
   const [signUp, setSignUp] = useState({
     user_Id: "",
     user_Name: "",
     user_Password: "",
+    user_Password_check: "",
     user_Email: "",
   });
 
-  const { user_Id, user_Name, user_Password, user_Email } = signUp;
+  const {
+    user_Id,
+    user_Name,
+    user_Password,
+    user_Password_check,
+    user_Email,
+  } = signUp;
 
   const setValues = (e) => {
     const { value, name } = e.target;
@@ -22,6 +30,9 @@ const SignUpContainer = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (user_Password !== user_Password_check)
+      return alert("비밀번호가 맞지 않습니다.");
+
     const data = signUp;
 
     fetchData({ method: "POST", url: "users/signup", data }).then((res) =>
@@ -31,12 +42,17 @@ const SignUpContainer = () => {
 
   return (
     <section css={WriteContainerWrapper}>
-      <form css={formContainerWrapper} onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <table>
           <tbody>
             <tr>
+              <td colSpan="2" style={{ textAlign: "center" }}>
+                <h1>회원 가입</h1>
+              </td>
+            </tr>
+            <tr>
               <td>
-                <label htmlFor="user_Name">이름</label>
+                <Label htmlFor="user_Name">이름</Label>
               </td>
               <td>
                 <Input
@@ -51,7 +67,7 @@ const SignUpContainer = () => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="user_Id">아이디</label>
+                <Label htmlFor="user_Id">아이디</Label>
               </td>
               <td>
                 <Input
@@ -63,14 +79,16 @@ const SignUpContainer = () => {
                 />
               </td>
             </tr>
+
             <tr>
               <td>
-                <label htmlFor="user_Password">비밀번호</label>
+                <Label htmlFor="user_Password">비밀번호</Label>
               </td>
               <td>
                 <Input
                   name="user_Password"
                   placeholder="비밀번호를 입력해 주세요"
+                  type="password"
                   value={user_Password}
                   onChange={setValues}
                   required={true}
@@ -79,7 +97,22 @@ const SignUpContainer = () => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="user_Email">이메일</label>
+                <Label htmlFor="user_Password">비밀번호 확인</Label>
+              </td>
+              <td>
+                <Input
+                  name="user_Password_check"
+                  placeholder="비밀번호를 확인해 주세요"
+                  type="password"
+                  value={user_Password_check}
+                  onChange={setValues}
+                  required={true}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Label htmlFor="user_Email">이메일</Label>
               </td>
               <td>
                 <Input
@@ -87,15 +120,20 @@ const SignUpContainer = () => {
                   value={user_Email}
                   onChange={setValues}
                   placeholder="이메일을 입력해 주세요"
+                  type="email"
                 />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="2">
+                <Button width="100%" variation="outline" type="submit">
+                  작성하기
+                </Button>
               </td>
             </tr>
           </tbody>
         </table>
-        <Button width="100%" variation="outline" type="submit">
-          작성 하기
-        </Button>
-      </form>
+      </Form>
     </section>
   );
 };
@@ -103,32 +141,13 @@ const SignUpContainer = () => {
 const WriteContainerWrapper = css`
   width: 30rem;
   padding: 2rem;
-  margin: 3rem auto;
+  margin: 5rem auto;
   border: 1px solid ${COLORS.primary};
   border-radius: 1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
     transition: 0.3s;
-  }
-`;
-
-const formContainerWrapper = css`
-  width: 100%;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  textarea {
-    margin-top: 2rem;
-    padding: 1rem;
-    width: 90%;
-    height: 14rem;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0.2rem;
-    resize: none;
   }
 `;
 

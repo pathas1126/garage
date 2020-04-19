@@ -1,9 +1,10 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
 import React, { useState } from "react";
-import { Input, Button } from "../components";
+import { Input, Button, Form, Select } from "../components";
 import { fetchData } from "../library";
 import { COLORS } from "../assets/colors";
+import { Label } from "../components/Label";
 
 const WriteContainer = () => {
   const [post, setPost] = useState({
@@ -14,7 +15,7 @@ const WriteContainer = () => {
     item_Status: "",
     item_Price: "",
     item_Brand_model: "",
-    item_Sort: "",
+    item_Sort: "기타",
     item_Writer: "",
     item_Detail: "",
     item_Number: Date.now(),
@@ -27,10 +28,8 @@ const WriteContainer = () => {
     deal_Location,
     sales_KakaoId,
     sales_Contact,
-    item_Status,
     item_Price,
     item_Brand_model,
-    item_Sort,
     item_Detail,
   } = post;
 
@@ -41,6 +40,7 @@ const WriteContainer = () => {
 
   const setValues = (e) => {
     const { value, name } = e.target;
+    console.log(value, name);
     setPost({ ...post, [name]: value });
   };
 
@@ -102,7 +102,7 @@ const WriteContainer = () => {
 
   return (
     <section css={WriteContainerWrapper}>
-      <form css={formContainerWrapper} onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <table>
           <tbody>
             <tr>
@@ -119,11 +119,12 @@ const WriteContainer = () => {
               </td>
             </tr>
             <tr>
-              <td>거래 위치</td>
+              <td>
+                <Label htmlFor="deal_Location">거래 위치</Label>
+              </td>
               <td>
                 <Input
                   name="deal_Location"
-                  width="80%"
                   placeholder="거래 위치를 입력해 주세요"
                   value={deal_Location}
                   onChange={setValues}
@@ -132,11 +133,12 @@ const WriteContainer = () => {
               </td>
             </tr>
             <tr>
-              <td>연락처</td>
+              <td>
+                <Label htmlFor="sales_Contact">연락처</Label>
+              </td>
               <td>
                 <Input
                   name="sales_Contact"
-                  width="80%"
                   placeholder="연락처를 입력해 주세요"
                   value={sales_Contact}
                   onChange={setValues}
@@ -145,49 +147,67 @@ const WriteContainer = () => {
               </td>
             </tr>
             <tr>
-              <td>카카오톡 ID</td>
+              <td>
+                <Label htmlFor="sales_KakaoId">카카오톡 ID</Label>
+              </td>
               <td>
                 <Input
                   name="sales_KakaoId"
-                  width="80%"
                   value={sales_KakaoId}
                   onChange={setValues}
-                  placeholder="카카오톡 아이디를 입력해 주세요"
+                  placeholder="카톡 아이디를 입력해 주세요"
                 />
               </td>
             </tr>
             <tr>
-              <td>삽니다/팝니다</td>
               <td>
-                <Input
-                  name="item_Status"
-                  width="80%"
-                  placeholder="악기를 사실 건가요, 파실 건가요?"
-                  value={item_Status}
-                  onChange={setValues}
-                  required={true}
-                />
+                <Label htmlFor="item_Status">팝니다/삽니다</Label>
+              </td>
+              <td>
+                <div css={radioWrapper}>
+                  <Input
+                    name="item_Status"
+                    placeholder="악기를 사실 건가요, 파실 건가요?"
+                    value="팝니다"
+                    onChange={setValues}
+                    type="radio"
+                    required={true}
+                  />
+                  <Label htmlFor="item_Stauts">팝니다</Label>
+
+                  <Input
+                    name="item_Status"
+                    placeholder="악기를 사실 건가요, 파실 건가요?"
+                    value="삽니다"
+                    onChange={setValues}
+                    type="radio"
+                  />
+                  <Label htmlFor="item_Stauts">삽니다</Label>
+                </div>
               </td>
             </tr>
             <tr>
-              <td>가격</td>
+              <td>
+                <Label htmlFor="item_Price">가격</Label>
+              </td>
               <td>
                 <Input
                   name="item_Price"
-                  width="80%"
                   value={item_Price}
                   placeholder="가격은 숫자만 입력해 주세요"
                   onChange={setValues}
                   required={true}
+                  type="number"
                 />
               </td>
             </tr>
             <tr>
-              <td>제조사</td>
+              <td>
+                <Label htmlFor="item_Brand_model">제조사</Label>
+              </td>
               <td>
                 <Input
                   name="item_Brand_model"
-                  width="80%"
                   value={item_Brand_model}
                   onChange={setValues}
                   placeholder="제조사를 입력해 주세요"
@@ -195,22 +215,27 @@ const WriteContainer = () => {
               </td>
             </tr>
             <tr>
-              <td>악기 분류</td>
               <td>
-                <Input
-                  name="item_Sort"
-                  width="80%"
-                  value={item_Sort}
+                <Label htmlFor="item_Sort">악기 분류</Label>
+              </td>
+              <td>
+                <Select
+                  value={["기타", "드럼", "베이스", "키보드"]}
                   onChange={setValues}
-                  required={true}
-                  placeholder="악기의 종류를 입력해 주세요"
-                />
+                  name="item_Sort"
+                ></Select>
               </td>
             </tr>
             <tr>
-              <td>이미지</td>
               <td>
-                <input type="file" onChange={getImage} />
+                <Label htmlFor="item_Image" file={true}>
+                  이미지 업로드
+                </Label>
+              </td>
+              <td>
+                <div>
+                  <Input type="file" name="item_Image" onChange={getImage} />
+                </div>
               </td>
             </tr>
             {uploadedImg.fileName ? (
@@ -232,10 +257,10 @@ const WriteContainer = () => {
           value={item_Detail}
           onChange={setValues}
         ></textarea>
-        <Button width="100%" variation="outline" type="submit">
+        <Button width="90%" variation="outline" type="submit">
           작성 하기
         </Button>
-      </form>
+      </Form>
     </section>
   );
 };
@@ -253,23 +278,11 @@ const WriteContainerWrapper = css`
   }
 `;
 
-const formContainerWrapper = css`
-  width: 100%;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const radioWrapper = css`
+  margin-top: 0.3rem;
   align-items: center;
-  textarea {
-    margin-top: 2rem;
-    padding: 1rem;
-    width: 90%;
-    height: 14rem;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 0.2rem;
-    resize: none;
-  }
+  word-break: keep-all;
+  flex-wrap: wrap;
 `;
 
 const imageWrapper = css`

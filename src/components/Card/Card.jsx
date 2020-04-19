@@ -49,7 +49,7 @@ const Card = ({
 
 const defaultStyle = css`
   margin: 0.5rem;
-  width: 23rem;
+  width: 21rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,14 +101,12 @@ const headerStyle = css`
 const infoStyle = css`
   width: 90%;
   fieldset {
-    border: 1px solid ${COLORS.primary};
+    border: 1px solid ${COLORS.secondary};
   }
   fieldset > legend {
-    background: ${COLORS.primary};
     padding: 0.2rem;
     margin-right: 0.5rem;
-    border-radius: 0.2rem;
-    color: white;
+    color: ${COLORS.secondary};
   }
   p {
     margin: 0.4rem 0 0 0;

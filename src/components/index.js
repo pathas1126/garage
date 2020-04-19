@@ -11,6 +11,8 @@ export { Input } from "./Input";
 export { Card } from "./Card";
 export { Loader } from "./Loader";
 export { Editor } from "./Editor";
+export { Form } from "./Form";
+export { Select } from "./Select";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";

@@ -1,10 +1,11 @@
 /**@jsx jsx */
 import { useState, useContext } from "react";
 import { jsx, css } from "@emotion/core";
-import { Input, Button } from "../components";
+import { Input, Button, Form } from "../components";
 import { fetchData } from "../library";
 import { LoginContext } from "../store";
 import { Link } from "react-router-dom";
+import { Label } from "../components/Label";
 
 const LoginContainer = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -33,7 +34,7 @@ const LoginContainer = () => {
             JSON.stringify({ user_Id: data.user_Id, logon: true })
           );
           alert("로그인에 성공했습니다.");
-          window.history.go(-1);
+          return window.history.go(-1);
         } else {
           alert(data.msg);
         }
@@ -46,61 +47,93 @@ const LoginContainer = () => {
   return (
     <section css={loginWrapper}>
       <header>
-        <h1>로그인</h1>
+        <h1 style={{ fontSize: "1.4rem" }}>환영합니다.</h1>
       </header>
-      <article css={formWrapper}>
-        <form onSubmit={login}>
-          <Input
-            name="user_Id_FF"
-            value={user_Id_FF}
-            onChange={getInputValue}
-            placeholder="ID를 입력하세요"
-            required={true}
-          ></Input>
-          <Input
-            name="user_Password_FF"
-            value={user_Password_FF}
-            onChange={getInputValue}
-            placeholder="PW를 입력하세요"
-            required={true}
-          ></Input>
-          <Button
-            variation="outline"
-            color="teritiaty"
-            type="submit"
-            width="100%"
-          >
-            로그인
-          </Button>
-          <Link to="/signup">회원가입</Link>
-        </form>
+      <article>
+        <Form onSubmit={login}>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Label htmlFor="user_Id_FF">아이디</Label>
+                </td>
+                <td>
+                  <Input
+                    name="user_Id_FF"
+                    value={user_Id_FF}
+                    onChange={getInputValue}
+                    placeholder="ID를 입력하세요"
+                    required={true}
+                  ></Input>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Label htmlFor="user_Password_FF">비밀번호</Label>
+                </td>
+                <td>
+                  <Input
+                    name="user_Password_FF"
+                    value={user_Password_FF}
+                    type="password"
+                    onChange={getInputValue}
+                    placeholder="PW를 입력하세요"
+                    required={true}
+                  ></Input>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="2">
+                  <Button
+                    variation="outline"
+                    color="teritiaty"
+                    type="submit"
+                    width="100%"
+                  >
+                    로그인
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  colSpan="2"
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#5a6a6a",
+                    textAlign: "right",
+                    "&:hover": {
+                      color: "black",
+                    },
+                  }}
+                >
+                  <Link to="/signup">회원이 아니신가요?</Link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Form>
       </article>
     </section>
   );
 };
 
 const loginWrapper = css`
-  margin: 3rem auto;
-  width: 60%;
-  border: 1px solid black;
+  margin: 9rem auto;
+  width: 27rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   a {
     text-decoration: none;
     color: inherit;
   }
-`;
-
-const headerWrapper = css``;
-
-const formWrapper = css`
-  form {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
   }
 `;
 
