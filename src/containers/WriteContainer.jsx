@@ -66,7 +66,7 @@ const WriteContainer = () => {
   };
 
   const onSubmit = (e) => {
-    e.stopPropagation();
+    e.preventDefault();
     const user_Id = sessionStorage.getItem("user_Id");
     const data = post;
 
@@ -94,8 +94,8 @@ const WriteContainer = () => {
           item_Detail: "",
           item_Picture: "",
         });
-        alert("글이 성공적으로 작성되었습니다.");
         window.location.href = "/sales";
+        return alert("글이 성공적으로 작성되었습니다.");
       }
     });
   };
