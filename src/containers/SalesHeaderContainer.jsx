@@ -1,10 +1,14 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Input, Button } from "../components";
+import { useContext } from "react";
+import { LoginContext } from "../store";
 
 const SalesHeaderContainer = () => {
+  const { loginStatus } = useContext(LoginContext);
+
   const checkLogin = () => {
-    if (JSON.parse(sessionStorage.getItem("logon")) === true) {
+    if (loginStatus.logon === true) {
       window.location.href = "/sales/write";
     } else {
       alert("로그인 하셔야 글을 작성하실 수 있습니다.");

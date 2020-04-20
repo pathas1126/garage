@@ -48,7 +48,7 @@ const Card = ({
 };
 
 const defaultStyle = css`
-  margin: 0.5rem;
+  margin: 0.8rem;
   width: 21rem;
   display: flex;
   flex-direction: column;

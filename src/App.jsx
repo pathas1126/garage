@@ -13,6 +13,7 @@ import {
   DetailPage,
   WritePage,
   SignUpPage,
+  ItemUpdatePage,
 } from "./pages";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         {/* ROUTE 설정 */}
         <Route exact path="/" component={MainPage} />
         <Switch>
+          <Route path="/sales/detail/:id/update" component={ItemUpdatePage} />
           <Route path="/sales/detail/:id" component={DetailPage} />
           <Route path="/sales/write" component={WritePage} />
           <Route path="/sales" component={SalesPage} />

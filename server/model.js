@@ -1,4 +1,5 @@
 const firestore = require("./firebase");
+const fs = require("fs");
 
 module.exports = {
   api: {},
@@ -34,6 +35,36 @@ module.exports = {
     write: (data, callback) => {
       firestore.collection("items").add({ ...data });
       callback(true);
+    },
+    // 상세 페이지
+    item: {
+      remove: (data, callback) => {
+        firestore
+          .collection("items")
+          .where("item_Number", "==", data)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              // 데이터에 포함된 이미지 파일 삭제
+              const { item_Picture } = doc.data();
+              console.log(item_Picture);
+              if (item_Picture) {
+                fs.unlink(`public/${item_Picture}`, (err) => {
+                  if (err) throw err;
+                  console.log(`item_Picture was deleted`);
+                });
+              }
+              // DB에 있는 다큐먼트 삭제
+              doc.ref.delete();
+
+              callback(true);
+            });
+          })
+          .catch((err) => {
+            callback(false);
+            throw err;
+          });
+      },
     },
   },
   // 로그인 페이지 API

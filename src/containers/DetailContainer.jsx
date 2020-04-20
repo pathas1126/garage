@@ -12,7 +12,6 @@ const DetailContainer = ({ data, item_Id }) => {
       method: "POST",
       url: `/sales/detail/`,
       data: { item_Id },
-      header: new Headers(),
     })
       .then((data) => {
         setItem((prevItem) => data.data);

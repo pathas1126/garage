@@ -23,7 +23,17 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    // 상품 상세 페이지
+    item: {
+      remove: (req, res) => {
+        const { item_Number } = req.body;
+        model.sales.item.remove(item_Number, (result) => {
+          if (result) res.send(result);
+        });
+      },
+    },
   },
+
   // 로그인 페이지 API
   users: {
     login: (req, res) => {

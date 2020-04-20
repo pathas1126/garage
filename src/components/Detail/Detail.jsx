@@ -2,22 +2,51 @@
 import { jsx, css } from "@emotion/core";
 import { Button } from "../Button";
 import { COLORS } from "../../assets/colors";
+import { useContext } from "react";
+import { LoginContext } from "../../store";
+import { Link } from "react-router-dom";
+import { fetchData } from "../../library";
 
-const Detail = ({
-  item_Number,
-  user_Id,
-  item_Writer,
-  item_Sort,
-  item_Brand_model,
-  item_Price,
-  item_Detail,
-  item_Status,
-  sales_Contact,
-  sales_KakaoId,
-  deal_Location,
-  item_Name,
-  item_Picture,
-}) => {
+const Detail = (props) => {
+  const {
+    item_Number,
+    user_Id,
+    item_Writer,
+    item_Sort,
+    item_Brand_model,
+    item_Price,
+    item_Detail,
+    item_Status,
+    sales_Contact,
+    sales_KakaoId,
+    deal_Location,
+    item_Name,
+    item_Picture,
+  } = props;
+
+  const { loginStatus } = useContext(LoginContext);
+
+  const onUpdate = () => {};
+
+  const onRemove = () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      fetchData({
+        method: "POST",
+        url: "/sales/item/remove",
+        data: { item_Number },
+      })
+        .then((res) => {
+          if (res.data === true) {
+            window.location.href = "/sales";
+            return alert("글이 삭제되었습니다.");
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
+
   return (
     <section css={detailWrapperStyle}>
       <img src={item_Picture} alt="" />
@@ -31,16 +60,20 @@ const Detail = ({
             <td>{item_Writer}</td>
           </tr>
           <tr>
+            <td>판매자 연락처</td>
+            <td>{sales_Contact}</td>
+          </tr>
+          <tr>
+            <td>카카오톡ID</td>
+            <td>{sales_KakaoId}</td>
+          </tr>
+          <tr>
             <td>악기 종류</td>
             <td>{item_Sort}</td>
           </tr>
           <tr>
             <td>제조사</td>
             <td>{item_Brand_model}</td>
-          </tr>
-          <tr>
-            <td>카카오톡ID</td>
-            <td>{sales_KakaoId}</td>
           </tr>
           <tr>
             <td>거래 위치</td>
@@ -53,9 +86,23 @@ const Detail = ({
         </tbody>
       </table>
       <p css={detailStyle}>{item_Detail}</p>
-      <Button onClick={() => window.history.go(-1)} variation="outline">
-        돌아가기
-      </Button>
+      <footer css={footerStyle}>
+        <Button onClick={() => window.history.go(-1)} variation="outline">
+          돌아가기
+        </Button>
+        {loginStatus.user_Id === user_Id && (
+          <div>
+            <Link to={`/sales/detail/${item_Number}/update`}>
+              <Button variation="outline" color="secondary">
+                글 수정
+              </Button>
+            </Link>
+            <Button variation="outline" color="warning" onClick={onRemove}>
+              글 삭제
+            </Button>
+          </div>
+        )}{" "}
+      </footer>
     </section>
   );
 };
@@ -114,4 +161,17 @@ const detailStyle = css`
   border: 1px solid ${COLORS.primary};
   border-radius: 0.3rem;
 `;
+
+const footerStyle = css`
+  width: 81%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  a {
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+`;
+
 export default Detail;

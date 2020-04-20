@@ -29,6 +29,10 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
   });
 });
 
+// 상품 상세 페이지, 글 수정, 삭제
+
+router.post("/sales/item/remove", controller.sales.item.remove);
+
 router.post("/sales/write", controller.sales.write);
 
 // 로그인 페이지 라우트
