@@ -10,14 +10,17 @@ const DetailContainer = ({ data, item_Id }) => {
     setLoading(true);
     fetchData({
       method: "POST",
-      url: `/sales/detail/`,
+      url: `/sales/detail/item`,
       data: { item_Id },
     })
       .then((data) => {
+        console.log(data);
         setItem((prevItem) => data.data);
         setLoading(false);
       })
       .catch((err) => {
+        // 개발용
+        alert("DB에 같은 아이디로 저장된 문서가 있습니다.");
         throw err;
       });
   }, [item_Id]);

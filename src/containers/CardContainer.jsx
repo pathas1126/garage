@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "../components";
 
 const CardContainer = ({ data }) => {
-  console.log(data);
   return (
     <>
       {data.length > 0 &&

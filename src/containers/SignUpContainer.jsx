@@ -35,9 +35,13 @@ const SignUpContainer = () => {
 
     const data = signUp;
 
-    fetchData({ method: "POST", url: "users/signup", data }).then((res) =>
-      console.log(res)
-    );
+    fetchData({ method: "POST", url: "users/signup", data }).then((res) => {
+      const { data } = res;
+      if (data) {
+        alert("회원 가입이 성공적으로 이루어졌습니다.");
+        return (window.location.href = "/");
+      }
+    });
   };
 
   return (

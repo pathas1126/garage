@@ -9,10 +9,14 @@ const SalesContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchData({ method: "GET", url: "/sales/items" }).then((data) => {
-      setItems((prevItems) => prevItems.concat(data.data));
-      setLoading(false);
-    });
+    fetchData({ method: "GET", url: "/sales/items" })
+      .then((data) => {
+        setItems((prevItems) => prevItems.concat(data.data));
+        setLoading(false);
+      })
+      .catch((err) => {
+        throw err;
+      });
   }, []);
   return (
     <section

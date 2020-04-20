@@ -26,13 +26,11 @@ const Detail = (props) => {
 
   const { loginStatus } = useContext(LoginContext);
 
-  const onUpdate = () => {};
-
   const onRemove = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       fetchData({
         method: "POST",
-        url: "/sales/item/remove",
+        url: "/sales/detail/remove",
         data: { item_Number },
       })
         .then((res) => {

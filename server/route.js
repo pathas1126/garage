@@ -20,7 +20,7 @@ const upload = multer({
 // 상품 페이지 관련 라우트
 router.get("/sales/items", controller.sales.items);
 
-router.post("/sales/detail", controller.sales.detail);
+router.post("/sales/write", controller.sales.write);
 
 router.post("/sales/image", upload.single("img"), (req, res, next) => {
   console.log(req.file);
@@ -29,11 +29,12 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
   });
 });
 
-// 상품 상세 페이지, 글 수정, 삭제
+// 상품 상세 페이지
+router.post("/sales/detail/item", controller.sales.detail.item);
 
-router.post("/sales/item/remove", controller.sales.item.remove);
+router.post("/sales/detail/remove", controller.sales.detail.remove);
 
-router.post("/sales/write", controller.sales.write);
+router.post("/sales/detail/update", controller.sales.detail.update);
 
 // 로그인 페이지 라우트
 router.post("/users/login", controller.users.login);

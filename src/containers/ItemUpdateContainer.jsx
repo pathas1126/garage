@@ -34,7 +34,7 @@ const ItemUpdateContainer = ({ item_Id }) => {
   useEffect(() => {
     fetchData({
       method: "POST",
-      url: `/sales/detail/`,
+      url: `/sales/detail/item`,
       data: { item_Id },
     })
       .then((res) => {
@@ -104,7 +104,7 @@ const ItemUpdateContainer = ({ item_Id }) => {
         item_Price: Number(item_Price),
         item_Writer: user_Id,
       },
-      url: "/sales/write",
+      url: "/sales/detail/update",
     }).then((res) => {
       if (res.data) {
         setPost({

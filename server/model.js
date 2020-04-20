@@ -18,26 +18,26 @@ module.exports = {
           throw err;
         });
     },
-    detail: (item_Id, callback) => {
-      firestore
-        .collection("items")
-        .where("item_Number", "==", Number(item_Id))
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            callback(doc.data());
-          });
-        })
-        .catch((err) => {
-          throw err;
-        });
-    },
-    write: (data, callback) => {
-      firestore.collection("items").add({ ...data });
-      callback(true);
-    },
     // 상세 페이지
-    item: {
+    detail: {
+      item: (item_Id, callback) => {
+        firestore
+          .collection("items")
+          .where("item_Number", "==", Number(item_Id))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 1) {
+              return callback(false);
+            }
+            querySnapshot.forEach((doc) => {
+              const resData = doc.data();
+              callback(resData);
+            });
+          })
+          .catch((err) => {
+            throw err;
+          });
+      },
       remove: (data, callback) => {
         firestore
           .collection("items")
@@ -65,6 +65,33 @@ module.exports = {
             throw err;
           });
       },
+      update: (data, callback) => {
+        const { item_Number } = data;
+        firestore
+          .collection("items")
+          .where("item_Number", "==", item_Number)
+          .get()
+          .then((querySnapshot) =>
+            querySnapshot.forEach((doc) => {
+              // 수정 요청된 이미지 주소와 DB의 이미지 주소가 다르다면 로컬 이미지 삭제
+              if (data.item_Picture !== doc.data().item_Picture) {
+                fs.unlink(`public/${doc.data().item_Picture}`, (err) => {
+                  if (err) throw err;
+                  console.log(`item_Picture was deleted`);
+                });
+              }
+              doc.ref.set({ ...data });
+              callback(true);
+            })
+          )
+          .catch((err) => {
+            throw err;
+          });
+      },
+    },
+    write: (data, callback) => {
+      firestore.collection("items").add({ ...data });
+      callback(true);
     },
   },
   // 로그인 페이지 API
