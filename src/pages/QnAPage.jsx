@@ -1,14 +1,14 @@
 import React from "react";
 import { PageTemplate } from "../components";
 
-const Sales = () => {
+const QnAPage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>SALES PAGE</h1>
+        <h1>QnA PAGE</h1>
       </PageTemplate>
     </>
   );
 };
 
-export default Sales;
+export default QnAPage;

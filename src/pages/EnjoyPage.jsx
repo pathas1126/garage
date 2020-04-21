@@ -1,14 +1,14 @@
 import React from "react";
 import { PageTemplate } from "../components";
 
-const Contact = () => {
+const EnjoyPage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>Contact PAGE</h1>
+        <h1>ENJOY PAGE</h1>
       </PageTemplate>
     </>
   );
 };
 
-export default Contact;
+export default EnjoyPage;

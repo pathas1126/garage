@@ -1,14 +1,14 @@
 import React from "react";
 import { PageTemplate } from "../components";
 
-const Enjoy = () => {
+const MainPage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>QnA PAGE</h1>
+        <h1>MAIN PAGE</h1>
       </PageTemplate>
     </>
   );
 };
 
-export default Enjoy;
+export default MainPage;

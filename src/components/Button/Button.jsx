@@ -11,9 +11,14 @@ const Button = ({
   size = "medium",
   variation,
   width,
+  type = "button",
 }) => {
   return (
-    <button css={setStyle({ color, size, variation, width })} onClick={onClick}>
+    <button
+      css={setStyle({ color, size, variation, width })}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
@@ -76,6 +81,7 @@ const setStyle = ({ color, size, variation, width }) => {
     color: white;
     font-size: 1.3rem;
     border-radius: 0.5rem;
+    outline: none;
     cursor: pointer;
 
     /* 버튼 클리 시 스타일 */

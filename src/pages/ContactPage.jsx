@@ -1,13 +1,14 @@
 import React from "react";
 import { PageTemplate } from "../components";
-const Main = () => {
+
+const ContactPage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>MAIN PAGE</h1>
+        <h1>Contact PAGE</h1>
       </PageTemplate>
     </>
   );
 };
 
-export default Main;
+export default ContactPage;

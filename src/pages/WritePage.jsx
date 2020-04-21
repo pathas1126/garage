@@ -1,14 +1,15 @@
 import React from "react";
 import { PageTemplate } from "../components";
+import { WriteContainer } from "../containers";
 
-const Enjoy = () => {
+const WritePage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>ENJOY PAGE</h1>
+        <WriteContainer />
       </PageTemplate>
     </>
   );
 };
 
-export default Enjoy;
+export default WritePage;
