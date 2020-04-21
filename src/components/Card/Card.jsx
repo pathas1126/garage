@@ -31,7 +31,7 @@ const Card = ({
         <div css={infoStyle}>
           <fieldset>
             <legend>본문 내용</legend>
-            <p>{item_Detail.slice(0, 80)}...</p>
+            <p>{item_Detail && item_Detail.slice(0, 80)}...</p>
           </fieldset>
         </div>
         <div css={bottomStyle}>
