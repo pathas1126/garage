@@ -29,10 +29,15 @@ const LoginContainer = () => {
         const { data } = res;
         if (data.success) {
           sessionStorage.setItem("user_Id", data.user_Id);
+          sessionStorage.setItem("user_Name", data.user_Name);
+          sessionStorage.setItem("admin", false);
           sessionStorage.setItem("logon", data.success);
-          setLoginStatus(
-            JSON.stringify({ user_Id: data.user_Id, logon: true })
-          );
+          setLoginStatus({
+            user_Id: data.user_Id,
+            user_Name: data.userName,
+            logon: true,
+            admin: false,
+          });
           alert("로그인에 성공했습니다.");
           return window.history.go(-1);
         } else {

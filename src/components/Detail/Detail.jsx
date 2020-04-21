@@ -13,10 +13,8 @@ const Detail = (props) => {
     user_Id,
     item_Writer,
     item_Sort,
-    item_Brand_model,
     item_Price,
     item_Detail,
-    item_Status,
     sales_Contact,
     sales_KakaoId,
     deal_Location,
@@ -49,7 +47,7 @@ const Detail = (props) => {
     <section css={detailWrapperStyle}>
       <img src={item_Picture} alt="" />
       <header css={headerStyle}>
-        <h1>{item_Name}</h1> <span>{item_Status}</span>
+        <h1>{item_Name}</h1>
       </header>
       <table css={infoStyle}>
         <tbody>
@@ -68,10 +66,6 @@ const Detail = (props) => {
           <tr>
             <td>악기 종류</td>
             <td>{item_Sort}</td>
-          </tr>
-          <tr>
-            <td>제조사</td>
-            <td>{item_Brand_model}</td>
           </tr>
           <tr>
             <td>거래 위치</td>

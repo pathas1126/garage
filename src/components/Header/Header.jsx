@@ -12,14 +12,24 @@ const Header = () => {
 
   useEffect(() => {
     const user_Id_this = sessionStorage.getItem("user_Id");
+    const user_Name_this = sessionStorage.getItem("user_Name");
+    const admin_this = JSON.parse(sessionStorage.getItem("admin"));
     const logon_this = JSON.parse(sessionStorage.getItem("logon"));
-    setLoginStatus({ user_Id: user_Id_this, logon: logon_this });
+
+    setLoginStatus({
+      user_Id: user_Id_this,
+      user_Name: user_Name_this,
+      logon: logon_this,
+      admin: admin_this,
+    });
   }, [setLoginStatus]);
 
   const logout = () => {
     setLoginStatus({ user_Id: "", logon: false });
     sessionStorage.removeItem("user_Id");
+    sessionStorage.removeItem("user_Name");
     sessionStorage.removeItem("logon");
+    sessionStorage.removeItem("admin");
     alert("로그아웃 되었습니다.");
     window.location.href = "/";
   };

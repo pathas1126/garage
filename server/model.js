@@ -110,7 +110,7 @@ module.exports = {
             });
           }
           querySnapshot.forEach((doc) => {
-            const { user_Id, user_Password } = doc.data();
+            const { user_Id, user_Name, user_Password } = doc.data();
             if (user_Password !== user_Password_FF) {
               return callback({
                 success: false,
@@ -118,7 +118,7 @@ module.exports = {
               });
             }
             if (user_Id === user_Id_FF && user_Password === user_Password_FF) {
-              return callback({ success: true, user_Id });
+              return callback({ success: true, user_Id, user_Name });
             }
           });
         })

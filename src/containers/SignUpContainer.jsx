@@ -62,7 +62,7 @@ const SignUpContainer = () => {
                 <Input
                   name="user_Name"
                   autoFocus={true}
-                  placeholder="이름을 입력해 주세요"
+                  placeholder="별명을 입력해 주세요"
                   value={user_Name}
                   onChange={setValues}
                   required={true}

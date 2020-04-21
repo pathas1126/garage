@@ -12,9 +12,7 @@ const WriteContainer = () => {
     deal_Location: "",
     sales_KakaoId: "",
     sales_Contact: "",
-    item_Status: "",
     item_Price: "",
-    item_Brand_model: "",
     item_Sort: "기타",
     item_Writer: "",
     item_Detail: "",
@@ -29,7 +27,6 @@ const WriteContainer = () => {
     sales_KakaoId,
     sales_Contact,
     item_Price,
-    item_Brand_model,
     item_Detail,
   } = post;
 
@@ -40,7 +37,6 @@ const WriteContainer = () => {
 
   const setValues = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
     setPost({ ...post, [name]: value });
   };
 
@@ -68,6 +64,7 @@ const WriteContainer = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const user_Id = sessionStorage.getItem("user_Id");
+    const user_Name = sessionStorage.getItem("user_Name");
     const data = post;
 
     fetchData({
@@ -75,8 +72,7 @@ const WriteContainer = () => {
       data: {
         ...data,
         user_Id,
-        item_Price: Number(item_Price),
-        item_Writer: user_Id,
+        item_Writer: user_Name,
       },
       url: "/sales/write",
     }).then((res) => {
@@ -86,9 +82,7 @@ const WriteContainer = () => {
           deal_Location: "",
           sales_KakaoId: "",
           sales_Contact: "",
-          item_Status: "",
           item_Price: "",
-          item_Brand_model: "",
           item_Sort: "",
           item_Writer: "",
           item_Detail: "",
@@ -161,56 +155,16 @@ const WriteContainer = () => {
             </tr>
             <tr>
               <td>
-                <Label htmlFor="item_Status">팝니다/삽니다</Label>
-              </td>
-              <td>
-                <div css={radioWrapper}>
-                  <Input
-                    name="item_Status"
-                    placeholder="악기를 사실 건가요, 파실 건가요?"
-                    value="팝니다"
-                    onChange={setValues}
-                    type="radio"
-                    required={true}
-                  />
-                  <Label htmlFor="item_Stauts">팝니다</Label>
-
-                  <Input
-                    name="item_Status"
-                    placeholder="악기를 사실 건가요, 파실 건가요?"
-                    value="삽니다"
-                    onChange={setValues}
-                    type="radio"
-                  />
-                  <Label htmlFor="item_Stauts">삽니다</Label>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
                 <Label htmlFor="item_Price">가격</Label>
               </td>
               <td>
                 <Input
                   name="item_Price"
                   value={item_Price}
-                  placeholder="가격은 숫자만 입력해 주세요"
+                  placeholder="상품 가격을 입력해 주세요"
                   onChange={setValues}
                   required={true}
-                  type="number"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Label htmlFor="item_Brand_model">제조사</Label>
-              </td>
-              <td>
-                <Input
-                  name="item_Brand_model"
-                  value={item_Brand_model}
-                  onChange={setValues}
-                  placeholder="제조사를 입력해 주세요"
+                  type="text"
                 />
               </td>
             </tr>
@@ -276,13 +230,6 @@ const WriteContainerWrapper = css`
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);
     transition: 0.3s;
   }
-`;
-
-const radioWrapper = css`
-  margin-top: 0.3rem;
-  align-items: center;
-  word-break: keep-all;
-  flex-wrap: wrap;
 `;
 
 const imageWrapper = css`

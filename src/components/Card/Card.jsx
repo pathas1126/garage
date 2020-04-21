@@ -10,10 +10,8 @@ const Card = ({
   user_Id,
   item_Writer,
   item_Sort,
-  item_Brand_model,
   item_Price,
   item_Detail,
-  item_Status,
   sales_Contact,
   sales_KakaoId,
   deal_Location,
@@ -29,7 +27,6 @@ const Card = ({
       <article css={bodyStyle}>
         <div css={headerStyle}>
           <h1>{item_Name}</h1>
-          <span>{item_Status}</span>
         </div>
         <div css={infoStyle}>
           <fieldset>
@@ -127,10 +124,8 @@ Card.propTypes = {
   user_Id: PropTypes.string.isRequired,
   item_Writer: PropTypes.string.isRequired,
   item_Sort: PropTypes.string.isRequired,
-  item_Brand_model: PropTypes.string.isRequired,
-  item_Price: PropTypes.number.isRequired,
+  item_Price: PropTypes.string.isRequired,
   item_Detail: PropTypes.string.isRequired,
-  item_Status: PropTypes.string.isRequired,
   sales_Contact: PropTypes.string.isRequired,
   sales_KakaoId: PropTypes.string.isRequired,
   deal_Location: PropTypes.string.isRequired,

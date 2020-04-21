@@ -24,7 +24,7 @@ const SalesHeaderContainer = () => {
           검색
         </Button>
         <Button variation="noborder" color="secondary" onClick={checkLogin}>
-          글쓰기
+          상품 판매
         </Button>
       </div>
     </nav>
