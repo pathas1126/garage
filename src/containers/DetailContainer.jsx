@@ -9,9 +9,8 @@ const DetailContainer = ({ data, item_Id }) => {
   useEffect(() => {
     setLoading(true);
     fetchData({
-      method: "POST",
-      url: `/sales/detail/item`,
-      data: { item_Id },
+      method: "GET",
+      url: `/sales/detail/item/${item_Id}`,
     })
       .then((data) => {
         console.log(data);
@@ -36,6 +35,7 @@ const DetailContainer = ({ data, item_Id }) => {
           item_Sort={item.item_Sort}
           item_Price={item.item_Price}
           item_Detail={item.item_Detail}
+          item_Date={item.item_Date}
           sales_Contact={item.sales_Contact}
           sales_KakaoId={item.sales_KakaoId}
           deal_Location={item.deal_Location}

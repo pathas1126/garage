@@ -14,11 +14,8 @@ const WriteContainer = () => {
     sales_Contact: "",
     item_Price: "",
     item_Sort: "기타",
-    item_Writer: "",
     item_Detail: "",
-    item_Number: Date.now(),
     item_Picture: "",
-    user_Id: "",
   });
 
   const {
@@ -49,7 +46,6 @@ const WriteContainer = () => {
     fetchData({ method: "POST", data: formData, url: "/sales/image" }).then(
       (res) => {
         if (res) {
-          console.log(res);
           const { fileName } = res.data;
           setUploadedImg({
             fileName,
@@ -67,11 +63,17 @@ const WriteContainer = () => {
     const user_Name = sessionStorage.getItem("user_Name");
     const data = post;
 
+    const date = new Date();
+
     fetchData({
       method: "POST",
       data: {
         ...data,
         user_Id,
+        item_Number: Date.now(),
+        item_Date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date
+          .toString()
+          .slice(16, 24)}`,
         item_Writer: user_Name,
       },
       url: "/sales/write",
@@ -84,7 +86,6 @@ const WriteContainer = () => {
           sales_Contact: "",
           item_Price: "",
           item_Sort: "",
-          item_Writer: "",
           item_Detail: "",
           item_Picture: "",
         });

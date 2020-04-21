@@ -20,6 +20,7 @@ const Detail = (props) => {
     deal_Location,
     item_Name,
     item_Picture,
+    item_Date,
   } = props;
 
   const { loginStatus } = useContext(LoginContext);
@@ -73,7 +74,11 @@ const Detail = (props) => {
           </tr>
           <tr>
             <td>가격</td>
-            <td>{item_Price} 원</td>
+            <td>{item_Price}</td>
+          </tr>
+          <tr>
+            <td>작성 시간</td>
+            <td>{item_Date}</td>
           </tr>
         </tbody>
       </table>

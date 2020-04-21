@@ -30,11 +30,11 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
 });
 
 // 상품 상세 페이지
-router.post("/sales/detail/item", controller.sales.detail.item);
+router.get("/sales/detail/item/:item_Id", controller.sales.detail.item);
 
 router.post("/sales/detail/remove", controller.sales.detail.remove);
 
-router.post("/sales/detail/update", controller.sales.detail.update);
+router.put("/sales/detail/update", controller.sales.detail.update);
 
 // 로그인 페이지 라우트
 router.post("/users/login", controller.users.login);

@@ -15,11 +15,8 @@ const ItemUpdateContainer = ({ item_Id }) => {
     sales_Contact: "",
     item_Price: "",
     item_Sort: "기타",
-    item_Writer: "",
     item_Detail: "",
-    item_Number: Date.now(),
     item_Picture: "",
-    user_Id: "",
   });
 
   // 업로드할 이미지 상태
@@ -31,13 +28,11 @@ const ItemUpdateContainer = ({ item_Id }) => {
   // 수정할 데이터를 가져옴
   useEffect(() => {
     fetchData({
-      method: "POST",
-      url: `/sales/detail/item`,
-      data: { item_Id },
+      method: "GET",
+      url: `/sales/detail/item/${item_Id}`,
     })
       .then((res) => {
         const { data } = res;
-        console.log(data);
         setPost((prevItem) => data);
         setUploadedImg((prevImg) => ({
           fileName: "uploadedImg",
@@ -75,7 +70,6 @@ const ItemUpdateContainer = ({ item_Id }) => {
     fetchData({ method: "POST", data: formData, url: "/sales/image" }).then(
       (res) => {
         if (res) {
-          console.log(res);
           const { fileName } = res.data;
           setUploadedImg({
             fileName,
@@ -94,11 +88,16 @@ const ItemUpdateContainer = ({ item_Id }) => {
     const user_Name = sessionStorage.getItem("user_Name");
     const data = post;
 
+    const date = new Date();
+
     fetchData({
-      method: "POST",
+      method: "PUT",
       data: {
         ...data,
         user_Id,
+        item_Date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date
+          .toString()
+          .slice(16, 24)}`,
         item_Writer: user_Name,
       },
       url: "/sales/detail/update",
@@ -219,7 +218,7 @@ const ItemUpdateContainer = ({ item_Id }) => {
                 </div>
               </td>
             </tr>
-            {uploadedImg.fileName ? (
+            {uploadedImg.filePath ? (
               <tr>
                 <td colSpan="2" css={imageWrapper}>
                   <img

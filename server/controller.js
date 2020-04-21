@@ -14,7 +14,7 @@ module.exports = {
     // 상품 상세 페이지
     detail: {
       item: (req, res) => {
-        const { item_Id } = req.body;
+        const { item_Id } = req.params;
         model.sales.detail.item(item_Id, (result) => {
           if (result) {
             res.send(result);

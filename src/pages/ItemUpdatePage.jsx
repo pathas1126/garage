@@ -4,7 +4,6 @@ import ItemUpdateContainer from "../containers/ItemUpdateContainer";
 
 const ItemUpdatePage = ({ match }) => {
   const item_Id = match.params.id;
-  console.log(item_Id);
   return (
     <>
       <PageTemplate>
