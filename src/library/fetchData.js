@@ -1,4 +1,4 @@
 import axios from "axios";
 
-export const fetchData = ({ method, url, data }) =>
-  axios({ method, url, data });
+export const fetchData = ({ method, baseURL = "/", url, data }) =>
+  axios({ method, baseURL, url, data });
