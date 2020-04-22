@@ -5,14 +5,21 @@ module.exports = {
   api: {},
   // 상품 페이지 API
   sales: {
-    items: (callback) => {
+    items: (page, callback) => {
       firestore
         .collection("items")
         .get()
         .then((docs) => {
           const data = [];
-          docs.forEach((doc) => data.push(doc.data()));
-          callback(data);
+          docs.forEach((doc, i) => {
+            data.push(doc.data());
+          });
+          data.sort((a, b) => {
+            return b.item_Number - a.item_Number;
+          });
+          const resArr = data.slice((page - 1) * 10, page * 10);
+          const maxPage = Math.ceil(data.length / 10);
+          callback({ resArr, maxPage });
         })
         .catch((err) => {
           throw err;

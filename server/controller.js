@@ -5,7 +5,8 @@ module.exports = {
   // 상품 페이지 API
   sales: {
     items: (req, res) => {
-      model.sales.items((result) => {
+      const { page } = req.query;
+      model.sales.items(Number(page), (result) => {
         if (result) {
           res.send(result);
         }
