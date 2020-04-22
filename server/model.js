@@ -137,5 +137,21 @@ module.exports = {
       firestore.collection("users").add(data);
       callback(true);
     },
+    user: (data, callback) => {
+      firestore
+        .collection("users")
+        .where("user_Id", "==", data)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              const userData = doc.data();
+              callback(userData);
+            });
+          } else {
+            callback(false);
+          }
+        });
+    },
   },
 };

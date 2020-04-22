@@ -16,3 +16,4 @@ export { Select } from "./Select";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";
+export { UserTable } from "./UserTable";

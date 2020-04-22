@@ -61,5 +61,11 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    user: (req, res) => {
+      const { user_Id_logon } = req.body;
+      model.users.user(user_Id_logon, (result) => {
+        if (result) res.send(result);
+      });
+    },
   },
 };

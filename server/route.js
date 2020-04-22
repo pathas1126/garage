@@ -42,4 +42,7 @@ router.post("/users/login", controller.users.login);
 // 회원가입 라우트
 router.post("/users/signup", controller.users.signup);
 
+// 마이 페이지
+router.post("/users/user", controller.users.user);
+
 module.exports = router;
