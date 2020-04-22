@@ -14,6 +14,7 @@ import {
   WritePage,
   SignUpPage,
   ItemUpdatePage,
+  MyPagePosts,
 } from "./pages";
 
 function App() {
@@ -40,7 +41,10 @@ function App() {
         </Switch>
         <Route path="/enjoy" component={EnjoyPage} />
         <Route path="/qna" component={QnAPage} />
-        <Route path="/mypage" component={MyPage} />
+        <Switch>
+          <Route path="/mypage/posts/:user_Id" component={MyPagePosts} />
+          <Route path="/mypage" component={MyPage} />
+        </Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/contact" component={ContactPage} />

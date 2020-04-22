@@ -45,4 +45,9 @@ router.post("/users/signup", controller.users.signup);
 // 마이 페이지
 router.post("/users/user", controller.users.user);
 
+// 내 글 보기
+router.get("/users/myposts", controller.users.myposts);
+
+// 회원 탈퇴
+router.post("/users/withdrawal", controller.users.withdrawal);
 module.exports = router;

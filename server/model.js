@@ -151,6 +151,47 @@ module.exports = {
           } else {
             callback(false);
           }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+    myposts: (data, callback) => {
+      firestore
+        .collection("items")
+        .where("user_Id", "==", data)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            const posts = [];
+            querySnapshot.forEach((doc) => posts.push(doc.data()));
+            const resPosts = posts
+              .sort((a, b) => {
+                return b.item_Number - a.item_Number;
+              })
+              .slice(0, 8);
+            callback(resPosts);
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+    withdrawal: (data, callback) => {
+      firestore
+        .collection("users")
+        .where("user_Id", "==", data)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+              return callback(true);
+            });
+          }
+        })
+        .catch((err) => {
+          throw err;
         });
     },
   },

@@ -67,5 +67,17 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    myposts: (req, res) => {
+      const { id } = req.query;
+      model.users.myposts(id, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    withdrawal: (req, res) => {
+      const { user_Id } = req.body;
+      model.users.withdrawal(user_Id, (result) => {
+        if (result) res.send(result);
+      });
+    },
   },
 };

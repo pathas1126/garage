@@ -14,9 +14,11 @@ const MyPageContainer = () => {
 
   const { user_Id: user_Id_logon } = loginStatus;
 
-  const { user_Id, user_Password, user_Email, user_Name } = userData;
-
   useEffect(() => {
+    if (!sessionStorage.getItem("logon")) {
+      alert("로그인이 필요합니다");
+      return (window.location.href = "/login");
+    }
     fetchData({
       method: "POST",
       data: { user_Id_logon },
@@ -30,11 +32,7 @@ const MyPageContainer = () => {
         throw err;
       });
   }, [setUserData, user_Id_logon]);
-  return (
-    <>
-      <UserTable userData={userData} />
-    </>
-  );
+  return <>{user_Id_logon && <UserTable userData={userData} />}</>;
 };
 
 export default MyPageContainer;

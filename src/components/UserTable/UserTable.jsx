@@ -2,9 +2,35 @@
 import { jsx, css } from "@emotion/core";
 import { Button } from "../Button";
 import { Input } from "../Input";
+import { Link } from "react-router-dom";
+import { fetchData } from "../../library";
 
 const UserTable = ({ userData }) => {
   const { user_Id, user_Password, user_Email, user_Name } = userData;
+
+  const onWithdrawal = () => {
+    if (window.confirm("정말로 탈퇴하시겠습니까?")) {
+      fetchData({
+        method: "POST",
+        url: "/users/withdrawal",
+        data: { user_Id },
+      })
+        .then((res) => {
+          if (res.data) {
+            sessionStorage.removeItem("user_Id");
+            sessionStorage.removeItem("user_Name");
+            sessionStorage.removeItem("logon");
+            sessionStorage.removeItem("admin");
+            alert("정상적으로 탈퇴되었습니다.");
+            return (window.location.href = "/");
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
+
   return (
     <section css={userTableWrapper}>
       <table css={tableWrapper}>
@@ -37,10 +63,17 @@ const UserTable = ({ userData }) => {
         </tbody>
       </table>
       <footer css={footerWrapper}>
-        <Button color="secondary" variation="outline" width="100%">
-          내 글 보기
-        </Button>
-        <Button color="warning" variation="outline" width="100%">
+        <Link to={`/mypage/posts/${user_Id}`}>
+          <Button color="secondary" variation="outline" width="100%">
+            내 글 보기
+          </Button>
+        </Link>
+        <Button
+          color="warning"
+          variation="outline"
+          width="100%"
+          onClick={onWithdrawal}
+        >
           회원탈퇴
         </Button>
       </footer>
@@ -83,8 +116,11 @@ const footerWrapper = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  button + button {
-    margin-left: 0;
+  a {
+    width: 100%;
+    text-decoration: none;
+  }
+  a + button {
     margin-top: 0.1rem;
   }
 `;
