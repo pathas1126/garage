@@ -14,6 +14,7 @@ const LoginContainer = () => {
   });
 
   const { user_Id_FF, user_Password_FF } = loginInfo;
+
   const { setLoginStatus } = useContext(LoginContext);
 
   const getInputValue = (e) => {
@@ -27,16 +28,17 @@ const LoginContainer = () => {
     fetchData({ method: "POST", url: "/users/login", data: loginData })
       .then((res) => {
         const { data } = res;
+        console.log(res.data);
         if (data.success) {
           sessionStorage.setItem("user_Id", data.user_Id);
           sessionStorage.setItem("user_Name", data.user_Name);
-          sessionStorage.setItem("admin", false);
+          sessionStorage.setItem("admin", data.admin);
           sessionStorage.setItem("logon", data.success);
           setLoginStatus({
             user_Id: data.user_Id,
             user_Name: data.userName,
-            logon: true,
-            admin: false,
+            logon: data.success,
+            admin: data.admin,
           });
           alert("로그인에 성공했습니다.");
           return window.history.go(-1);

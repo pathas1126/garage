@@ -42,4 +42,19 @@ router.post("/users/login", controller.users.login);
 // 회원가입 라우트
 router.post("/users/signup", controller.users.signup);
 
+// 마이 페이지
+router.post("/users/user", controller.users.user);
+
+// 내 글 보기
+router.get("/users/myposts", controller.users.myposts);
+
+// 회원 탈퇴
+router.post("/users/withdrawal", controller.users.withdrawal);
+
+// 공지사항 글 조회
+router.get("/notice", controller.notice.get);
+
+// 공지사항 글 작성_관리자
+router.post("/notice", controller.notice.write);
+
 module.exports = router;

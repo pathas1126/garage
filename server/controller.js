@@ -5,7 +5,8 @@ module.exports = {
   // 상품 페이지 API
   sales: {
     items: (req, res) => {
-      model.sales.items((result) => {
+      const { page } = req.query;
+      model.sales.items(Number(page), (result) => {
         if (result) {
           res.send(result);
         }
@@ -58,6 +59,38 @@ module.exports = {
     signup: (req, res) => {
       const data = req.body;
       model.users.signup(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    user: (req, res) => {
+      const { user_Id_logon } = req.body;
+      model.users.user(user_Id_logon, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    myposts: (req, res) => {
+      const { id } = req.query;
+      model.users.myposts(id, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    withdrawal: (req, res) => {
+      const { user_Id } = req.body;
+      model.users.withdrawal(user_Id, (result) => {
+        if (result) res.send(result);
+      });
+    },
+  },
+  notice: {
+    write: (req, res) => {
+      const data = req.body;
+      model.notice.write(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    get: (req, res) => {
+      const { page } = req.query;
+      model.notice.get(page, (result) => {
         if (result) res.send(result);
       });
     },

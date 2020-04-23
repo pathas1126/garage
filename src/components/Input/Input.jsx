@@ -11,12 +11,13 @@ const Input = ({
   onChange,
   type = "text",
   required = false,
+  noborder,
 }) => {
   return (
     <input
       id={name}
       type={type}
-      css={setStyle({ type, width })}
+      css={setStyle({ type, width, noborder })}
       name={name}
       value={value}
       placeholder={placeholder}
@@ -27,7 +28,7 @@ const Input = ({
   );
 };
 
-const setStyle = ({ type, width }) => {
+const setStyle = ({ type, width, noborder }) => {
   const defaultStyle = css`
     padding: 0.8rem 0 0.2rem 0;
     width: 12rem;
@@ -60,6 +61,6 @@ const setStyle = ({ type, width }) => {
     `,
   };
 
-  return [defaultStyle, TYPES[type], { width }];
+  return [defaultStyle, TYPES[type], { width }, noborder && { border: "none" }];
 };
 export default React.memo(Input);

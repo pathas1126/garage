@@ -2,9 +2,13 @@
 import { jsx, css } from "@emotion/core";
 import { COLORS } from "../../assets/colors";
 
-const Loader = ({ borderColor = "primary", fontColor = "secondary" }) => {
+const Loader = ({
+  borderColor = "primary",
+  fontColor = "secondary",
+  loaderRef,
+}) => {
   return (
-    <div css={style(borderColor, fontColor)}>
+    <div css={style(borderColor, fontColor)} ref={loaderRef}>
       <div></div>
       <div>LOADING</div>
     </div>

@@ -5,3 +5,8 @@ export { default as SalesHeaderContainer } from "./SalesHeaderContainer";
 export { default as WriteContainer } from "./WriteContainer";
 export { default as LoginContainer } from "./LoginContainer";
 export { default as SignUpContainer } from "./SignUpContainer";
+export { default as MyPageContainer } from "./MyPageContainer";
+export { default as MyPagePostsContainer } from "./MyPagePostsContainer";
+
+export { default as NoticeContainer } from "./NoticeContainer";
+export { default as NoticeWriteContainer } from "./NoticeWriteContainer";
