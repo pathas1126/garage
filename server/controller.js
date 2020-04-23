@@ -94,5 +94,17 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    readcount: (req, res) => {
+      const { notice_Readcount, notice_Number } = req.body;
+      model.notice.readcount({ notice_Readcount, notice_Number }, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    delete: (req, res) => {
+      const { notice_Number } = req.body;
+      model.notice.delete(notice_Number, (result) => {
+        if (result) res.send(result);
+      });
+    },
   },
 };

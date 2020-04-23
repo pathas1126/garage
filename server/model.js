@@ -258,5 +258,43 @@ module.exports = {
           throw err;
         });
     },
+    readcount: (data, callback) => {
+      console.log(data);
+      const { notice_Number, notice_Readcount } = data;
+      firestore
+        .collection("notice")
+        .where("notice_Number", "==", notice_Number)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              doc.ref.set({
+                ...doc.data(),
+                notice_Readcount: notice_Readcount + 1,
+              });
+              callback(true);
+            });
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+    delete: (notice_Number, callback) => {
+      firestore
+        .collection("notice")
+        .where("notice_Number", "==", notice_Number)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0)
+            querySnapshot.forEach((doc) => {
+              doc.ref.delete();
+              callback(true);
+            });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
   },
 };

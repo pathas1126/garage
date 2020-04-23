@@ -14,6 +14,7 @@ const NoticeContainer = () => {
     loginStatus: { admin },
   } = useContext(LoginContext);
 
+  // 공지사항 목록 조회
   useEffect(() => {
     fetchData({ method: "GET", url: `/notice?page=${page}` })
       .then((res) => {
@@ -25,6 +26,8 @@ const NoticeContainer = () => {
         throw err;
       });
   }, [page]);
+
+  // 공지사항 세부내용 조회
 
   return (
     <section>
@@ -43,9 +46,12 @@ const NoticeContainer = () => {
             <NoticeRow
               key={v.notice_Number}
               notice_Date={v.notice_Date}
-              notice_Id={v.notice_Id}
+              notice_Number={v.notice_Number}
               notice_Subject={v.notice_Subject}
               manager_Id={v.manager_Id}
+              notice_Readcount={v.notice_Readcount}
+              notice_Content={v.notice_Content}
+              setNoticePosts={setNoticePosts}
               admin={admin}
             />
           ))}
