@@ -3,12 +3,12 @@ import { jsx, css } from "@emotion/core";
 import { Button } from "../index";
 import { COLORS } from "../../assets/colors";
 import { Link } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, Fragment } from "react";
 import { LoginContext } from "../../store";
 
 const Header = () => {
   const { loginStatus, setLoginStatus } = useContext(LoginContext);
-  const { logon } = loginStatus;
+  const { logon, admin } = loginStatus;
 
   useEffect(() => {
     const user_Id_this = sessionStorage.getItem("user_Id");
@@ -37,6 +37,7 @@ const Header = () => {
   return (
     <header css={setStyle()}>
       <section>
+        {admin && <span>관리자 로그인 중...</span>}
         {!logon && (
           <Link to="/login">
             <Button variation="noborder" color="secondary">
@@ -50,18 +51,21 @@ const Header = () => {
           </Button>
         )}
 
-        {logon && (
+        {logon && !admin && (
           <Link to="/mypage">
             <Button variation="noborder" color="secondary">
               MyPage
             </Button>
           </Link>
         )}
-        <Link to="/contact">
-          <Button variation="noborder" color="secondary">
-            Contact
-          </Button>
-        </Link>
+
+        {!admin && (
+          <Link to="/contact">
+            <Button variation="noborder" color="secondary">
+              Contact
+            </Button>
+          </Link>
+        )}
       </section>
       <h1>HEADER</h1>
     </header>

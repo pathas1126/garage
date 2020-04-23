@@ -50,4 +50,11 @@ router.get("/users/myposts", controller.users.myposts);
 
 // 회원 탈퇴
 router.post("/users/withdrawal", controller.users.withdrawal);
+
+// 공지사항 글 조회
+router.get("/notice", controller.notice.get);
+
+// 공지사항 글 작성_관리자
+router.post("/notice", controller.notice.write);
+
 module.exports = router;

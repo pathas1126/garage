@@ -105,29 +105,61 @@ module.exports = {
   users: {
     login: (user_Data, callback) => {
       const { user_Id_FF, user_Password_FF } = user_Data;
+
       firestore
-        .collection("users")
-        .where("user_Id", "==", user_Id_FF)
+        .collection("manager")
+        .where("manager_Id", "==", user_Id_FF)
         .get()
         .then((querySnapshot) => {
+          // 관리자 정보가 없는 경우 유저 정보 조회
           if (querySnapshot.size === 0) {
-            return callback({
-              success: false,
-              msg: "존재하지 않는 회원입니다.",
+            firestore
+              .collection("users")
+              .where("user_Id", "==", user_Id_FF)
+              .get()
+              .then((querySnapshot) => {
+                if (querySnapshot.size === 0) {
+                  return callback({
+                    success: false,
+                    msg: "존재하지 않는 회원입니다.",
+                  });
+                }
+                querySnapshot.forEach((doc) => {
+                  const { user_Id, user_Name, user_Password } = doc.data();
+                  if (user_Password !== user_Password_FF) {
+                    return callback({
+                      success: false,
+                      msg: "비밀번호를 확인해 주세요.",
+                    });
+                  }
+                  if (
+                    user_Id === user_Id_FF &&
+                    user_Password === user_Password_FF
+                  ) {
+                    return callback({
+                      success: true,
+                      user_Id,
+                      user_Name,
+                      admin: false,
+                    });
+                  }
+                });
+              })
+              .catch((err) => {
+                throw err;
+              });
+          } else {
+            // 관리자 정보 조회
+            querySnapshot.forEach((doc) => {
+              const { manager_Id, manager_Name } = doc.data();
+              return callback({
+                success: true,
+                user_Id: manager_Id,
+                user_Name: manager_Name,
+                admin: true,
+              });
             });
           }
-          querySnapshot.forEach((doc) => {
-            const { user_Id, user_Name, user_Password } = doc.data();
-            if (user_Password !== user_Password_FF) {
-              return callback({
-                success: false,
-                msg: "비밀번호를 확인해 주세요.",
-              });
-            }
-            if (user_Id === user_Id_FF && user_Password === user_Password_FF) {
-              return callback({ success: true, user_Id, user_Name });
-            }
-          });
         })
         .catch((err) => {
           throw err;
@@ -189,6 +221,38 @@ module.exports = {
               return callback(true);
             });
           }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+  },
+  notice: {
+    write: (data, callback) => {
+      firestore
+        .collection("notice")
+        .add({ ...data })
+        .catch((err) => {
+          throw err;
+        });
+      callback(true);
+    },
+    get: (page, callback) => {
+      const data = [];
+      firestore
+        .collection("notice")
+        .get()
+        .then((docs) => {
+          docs.forEach((doc) => data.push(doc.data()));
+          const resArr = data
+            .sort((a, b) => b.notice_Number - a.notice_Number)
+            .slice((page - 1) * 10, (page - 1) * 10 + 10);
+          const maxPage = [];
+          for (let i = 1; i <= Math.ceil(data.length / 10); i++) {
+            maxPage.push(i);
+          }
+          Math.ceil(data.length / 10);
+          callback({ resArr, maxPage });
         })
         .catch((err) => {
           throw err;

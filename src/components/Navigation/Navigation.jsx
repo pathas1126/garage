@@ -19,8 +19,8 @@ const Navigation = () => {
           </Link>
         </li>
         <li>
-          <Link to="/enjoy">
-            <Button>MUSIC</Button>
+          <Link to="/notice">
+            <Button>NOTICE</Button>
           </Link>
         </li>
         <li>

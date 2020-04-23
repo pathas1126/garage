@@ -80,4 +80,18 @@ module.exports = {
       });
     },
   },
+  notice: {
+    write: (req, res) => {
+      const data = req.body;
+      model.notice.write(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    get: (req, res) => {
+      const { page } = req.query;
+      model.notice.get(page, (result) => {
+        if (result) res.send(result);
+      });
+    },
+  },
 };

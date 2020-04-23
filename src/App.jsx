@@ -5,7 +5,6 @@ import { LoginProvider } from "./store";
 import {
   MainPage,
   SalesPage,
-  EnjoyPage,
   QnAPage,
   MyPage,
   LoginPage,
@@ -15,6 +14,8 @@ import {
   SignUpPage,
   ItemUpdatePage,
   MyPagePosts,
+  NoticePage,
+  NoticeWritePage,
 } from "./pages";
 
 function App() {
@@ -39,7 +40,10 @@ function App() {
           <Route path="/sales/write" component={WritePage} />
           <Route path="/sales" component={SalesPage} />
         </Switch>
-        <Route path="/enjoy" component={EnjoyPage} />
+        <Switch>
+          <Route path="/notice/write" component={NoticeWritePage} />
+          <Route path="/notice" component={NoticePage} />
+        </Switch>
         <Route path="/qna" component={QnAPage} />
         <Switch>
           <Route path="/mypage/posts/:user_Id" component={MyPagePosts} />

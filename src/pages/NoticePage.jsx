@@ -1,14 +1,15 @@
 import React from "react";
 import { PageTemplate } from "../components";
+import { NoticeContainer } from "../containers";
 
-const EnjoyPage = () => {
+const NoticePage = () => {
   return (
     <>
       <PageTemplate>
-        <h1>ENJOY PAGE</h1>
+        <NoticeContainer />
       </PageTemplate>
     </>
   );
 };
 
-export default EnjoyPage;
+export default NoticePage;

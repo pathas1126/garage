@@ -13,6 +13,7 @@ export { Loader } from "./Loader";
 export { Editor } from "./Editor";
 export { Form } from "./Form";
 export { Select } from "./Select";
+export { NoticeRow } from "./NoticeRow";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";
