@@ -39,6 +39,7 @@ module.exports = {
       },
     },
     write: (req, res) => {
+      console.log(req.body);
       const data = req.body;
       model.sales.write(data, (result) => {
         if (result) res.send(result);
