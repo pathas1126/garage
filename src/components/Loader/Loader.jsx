@@ -4,7 +4,7 @@ import { COLORS } from "../../assets/colors";
 
 const Loader = ({
   borderColor = "primary",
-  fontColor = "secondary",
+  fontColor = "primary",
   loaderRef,
 }) => {
   return (
@@ -41,12 +41,16 @@ const style = (borderColor, fontColor) => css`
     opacity: 0;
     animation: loading-text-opacity 2s linear 0s infinite normal;
   }
-  &:hover div:first-of-type {
-    border-color: transparent ${COLORS[fontColor]};
+  &:hover {
+    div:first-of-type {
+      border-color: transparent ${COLORS[fontColor]};
+    }
   }
-  &:hover > &,
-  & div {
-    transition: all 0.5s ease-in-out;
+  &:hover {
+    &,
+    & div {
+      transition: all 0.5s ease-in-out;
+    }
   }
 
   @keyframes rotate-loading {

@@ -5,9 +5,9 @@ import { useContext, useState } from "react";
 import { LoginContext } from "../store";
 import { fetchData } from "../library";
 
-const SalesHeaderContainer = ({ setItems, setSearching }) => {
+const SalesHeaderContainer = ({ setItems, setSearching, setSearchLoading }) => {
   const [searchData, setSearchData] = useState({
-    searchText: "",
+    searchText: "기타",
     searchType: "악기",
   });
 
@@ -53,6 +53,7 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
     }
 
     setSearching(true);
+    setSearchLoading(true);
 
     fetchData({
       url: `/sales/item?searchType=${searchType}&keyword=${searchText}`,
@@ -61,6 +62,7 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
       .then((res) => {
         if (res.data.length > 0) {
           setItems((prevItems) => res.data);
+          setSearchLoading(false);
         } else {
           return alert("검색 결과가 없습니다.");
         }
@@ -91,6 +93,7 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
             onChange={getValues}
             placeholder="검색 내용을 입력하세요."
             name="searchText"
+            width="19rem"
           />
         )}
 
@@ -106,7 +109,7 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
 };
 
 const SalesHeaderWrapper = css`
-  width: 80%;
+  width: 100%;
   min-width: 30rem;
   margin: 1rem auto;
   display: flex;

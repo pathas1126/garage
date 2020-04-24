@@ -9,6 +9,7 @@ const SalesContainer = () => {
   const [page, setPage] = useState(0);
   const [lastPage, setLastPage] = useState(2);
   const [searching, setSearching] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const loaderRef = useRef();
 
@@ -55,8 +56,16 @@ const SalesContainer = () => {
         justifyContent: "center",
       }}
     >
-      <SalesHeaderContainer setItems={setItems} setSearching={setSearching} />
-      <CardContainer data={items} />
+      <SalesHeaderContainer
+        setItems={setItems}
+        setSearching={setSearching}
+        setSearchLoading={setSearchLoading}
+      />
+      {!searchLoading ? (
+        <CardContainer data={items} />
+      ) : (
+        <Loader borderColor="secondary" fontColor="primary" />
+      )}
       <div style={{ width: "100%" }}>
         {lastPage === page ? (
           <h1 style={{ textAlign: "center" }}>모든 상품을 불러왔습니다.</h1>

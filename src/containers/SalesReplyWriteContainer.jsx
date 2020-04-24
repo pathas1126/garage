@@ -88,13 +88,14 @@ const SalesReplyWriteContainer = ({ item_Number, setItem_Replies }) => {
 
 const ReplyWriteWrapper = css`
   width: 100%;
+  margin: 0 auto;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   form {
-    width: 100%;
+    width: 99%;
   }
   textarea {
     width: 98.5%;
@@ -102,6 +103,7 @@ const ReplyWriteWrapper = css`
     resize: none;
   }
   div {
+    width: 99%;
     display: flex;
     justify-content: flex-end;
     button {

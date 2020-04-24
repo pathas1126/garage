@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Global, css } from "@emotion/core";
 import { LoginProvider } from "./store";
+
 import {
   MainPage,
   SalesPage,
@@ -28,6 +29,7 @@ function App() {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: "Noto Sans", "Noto Sans KR";
           }
         `}
       />

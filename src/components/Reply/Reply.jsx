@@ -51,9 +51,9 @@ const Reply = ({
 };
 
 const ReplyWrapper = css`
-  width: 90%;
+  width: 93%;
   margin: 0 auto;
-  padding: 1.1rem;
+  padding: 1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 
   header {

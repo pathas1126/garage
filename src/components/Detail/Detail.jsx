@@ -145,17 +145,16 @@ const headerStyle = css`
   border: 1px solid ${COLORS.primary};
   border-radius: 0.3rem;
   margin-bottom: 1rem;
-  span {
-    background: ${COLORS.secondary};
-    padding: 0.4rem;
-    border-radius: 0.2rem;
-    color: white;
+  h1 {
+    padding: 0 1rem;
   }
 `;
 
 const infoStyle = css`
   width: 82%;
-  padding: 0.3rem;
+  max-width: 48.3rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
   border: 1px solid ${COLORS.primary};
   border-radius: 0.3rem;
   tr {
@@ -169,11 +168,15 @@ const detailStyle = css`
   padding: 0.3rem;
   border: 1px solid ${COLORS.primary};
   border-radius: 0.3rem;
+  background: #fcfcfc;
+  p {
+    text-indent: 2rem;
+  }
 `;
 
 const footerStyle = css`
   margin-top: 1rem;
-  width: 83%;
+  width: 82%;
   display: flex;
   align-items: center;
   justify-content: space-between;

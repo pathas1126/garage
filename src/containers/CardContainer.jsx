@@ -18,7 +18,9 @@ const CardContainer = ({ data }) => {
             sales_KakaoId={v.sales_KakaoId}
             deal_Location={v.deal_Location}
             item_Name={v.item_Name}
-            item_Picture={v.item_Picture}
+            item_Picture={
+              v.item_Picture === "" ? "/images/default.png" : v.item_Picture
+            }
           />
         ))}
     </>

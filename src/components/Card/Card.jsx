@@ -22,7 +22,12 @@ const Card = ({
   return (
     <section css={defaultStyle}>
       <div css={[imageWrapper]}>
-        <img src={item_Picture} alt="" width="100%" height="100%" />
+        <img
+          src={item_Picture}
+          alt="상품 설명 이미지"
+          width="100%"
+          height="100%"
+        />
       </div>
       <article css={bodyStyle}>
         <div css={headerStyle}>

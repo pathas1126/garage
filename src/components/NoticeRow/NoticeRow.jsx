@@ -99,6 +99,7 @@ const rowStyle = css`
   margin-top: 1rem;
   padding: 2rem 1rem;
   width: 90%;
+  height: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -135,6 +136,7 @@ const contentStyle = css`
   margin-top: -0.1rem;
   padding: 2rem 1rem;
   width: 90%;
+  height: 8rem;
   display: block;
   background: #0a3d62;
   color: white;
