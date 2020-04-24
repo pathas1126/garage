@@ -12,6 +12,26 @@ module.exports = {
         }
       });
     },
+    item: (req, res) => {
+      let { searchType, keyword } = req.query;
+      switch (searchType) {
+        case "n":
+          searchType = "item_Name";
+          break;
+        case "s":
+          searchType = "item_Writer";
+          break;
+        case "m":
+          searchType = "item_Sort";
+          break;
+        default:
+          return null;
+      }
+
+      model.sales.item({ searchType, keyword }, (result) => {
+        if (result) res.send(result);
+      });
+    },
     // 상품 상세 페이지
     detail: {
       item: (req, res) => {

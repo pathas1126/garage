@@ -29,6 +29,8 @@ router.post("/sales/image", upload.single("img"), (req, res, next) => {
   });
 });
 
+router.get("/sales/item", controller.sales.item);
+
 // 상품 상세 페이지
 router.get("/sales/detail/item/:item_Id", controller.sales.detail.item);
 

@@ -25,6 +25,27 @@ module.exports = {
           throw err;
         });
     },
+    item: (data, callback) => {
+      const { searchType, keyword } = data;
+      firestore
+        .collection("items")
+        .where(searchType, "==", keyword)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            const data = [];
+            querySnapshot.forEach((doc) => {
+              console.log(doc.data());
+              data.push(doc.data());
+            });
+            const resArr = data.sort((a, b) => b.item_Number - a.item_Number);
+            callback(resArr);
+          } else {
+            callback([]);
+          }
+        });
+    },
+
     // 상세 페이지
     detail: {
       item: (item_Id, callback) => {

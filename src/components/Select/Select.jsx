@@ -2,9 +2,14 @@
 import { jsx, css } from "@emotion/core";
 import propTypes from "prop-types";
 
-const Select = ({ value, name, onChange }) => {
+const Select = ({ value, name, onChange, width }) => {
   return (
-    <select onChange={onChange} name={name} id={name} css={selectWrapper}>
+    <select
+      onChange={onChange}
+      name={name}
+      id={name}
+      css={[selectWrapper, width && { width }]}
+    >
       {value.length > 0 &&
         value.map((v, i) => (
           <option value={v} key={i}>

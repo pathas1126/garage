@@ -1,12 +1,11 @@
 import React from "react";
 import { PageTemplate } from "../components";
-import { SalesContainer, SalesHeaderContainer } from "../containers";
+import { SalesContainer } from "../containers";
 
 const SalesPage = () => {
   return (
     <>
       <PageTemplate>
-        <SalesHeaderContainer />
         <SalesContainer />
       </PageTemplate>
     </>

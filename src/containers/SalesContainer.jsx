@@ -2,16 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchData } from "../library";
 import { CardContainer } from "./index";
 import { Loader, Button } from "../components";
+import { SalesHeaderContainer } from "./index";
 
 const SalesContainer = () => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
   const [lastPage, setLastPage] = useState(2);
+  const [searching, setSearching] = useState(false);
 
   const loaderRef = useRef();
 
   // page에 따라 상품 리스트 요청
   useEffect(() => {
+    if (searching) return;
     fetchData({ method: "GET", url: `/sales/items?page=${page}` })
       .then((data) => {
         const {
@@ -25,7 +28,7 @@ const SalesContainer = () => {
       .catch((err) => {
         throw err;
       });
-  }, [page]);
+  }, [page, searching]);
 
   // Loader 컴포넌트에 Intersetion Observer 연결
   useEffect(() => {
@@ -52,12 +55,13 @@ const SalesContainer = () => {
         justifyContent: "center",
       }}
     >
+      <SalesHeaderContainer setItems={setItems} setSearching={setSearching} />
       <CardContainer data={items} />
       <div style={{ width: "100%" }}>
         {lastPage === page ? (
           <h1 style={{ textAlign: "center" }}>모든 상품을 불러왔습니다.</h1>
         ) : (
-          <Loader loaderRef={loaderRef} />
+          !searching && <Loader loaderRef={loaderRef} />
         )}
 
         <div

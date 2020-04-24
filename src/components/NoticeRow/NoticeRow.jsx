@@ -20,7 +20,7 @@ const NoticeRow = ({
 
   // 공지사항 세부 내용 조회
   const getContent = () => {
-    if (!sessionStorage.getItem("admin")) increaseReadCount();
+    if (!JSON.parse(sessionStorage.getItem("admin"))) increaseReadCount();
     setContentView(!contentView);
   };
 

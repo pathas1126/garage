@@ -143,7 +143,7 @@ const headerStyle = css`
 `;
 
 const infoStyle = css`
-  width: 80%;
+  width: 82%;
   padding: 0.3rem;
   border: 1px solid ${COLORS.primary};
   border-radius: 0.3rem;
