@@ -10,3 +10,4 @@ export { default as MyPagePostsContainer } from "./MyPagePostsContainer";
 
 export { default as NoticeContainer } from "./NoticeContainer";
 export { default as NoticeWriteContainer } from "./NoticeWriteContainer";
+export { default as NoticeUpdateContainer } from "./NoticeUpdateContainer";

@@ -5,10 +5,10 @@ import { Input, Button, Form } from "../components";
 import { COLORS } from "../assets/colors";
 import { fetchData } from "../library";
 
-const NoticeWriteContainer = ({ notice_Number }) => {
+const NoticeUpdateContainer = ({ notice_Number }) => {
   const [noticePost, setNoticePost] = useState({
-    notice_Number: Date.now(),
-    manager_Id: sessionStorage.getItem("user_Name"),
+    notice_Number: "",
+    manager_Id: "",
     notice_Subject: "",
     notice_Content: "",
     notice_Date: "",
@@ -35,25 +35,20 @@ const NoticeWriteContainer = ({ notice_Number }) => {
   const setValues = (e) => {
     const { name, value } = e.target;
     setNoticePost((prevPost) => ({ ...prevPost, [name]: value }));
-    console.log(noticePost);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const date = new Date();
     fetchData({
-      method: "POST",
-      url: "/notice",
+      method: "PUT",
+      url: `/notice/${notice_Number}`,
       data: {
         ...noticePost,
-        notice_Date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date
-          .toString()
-          .slice(16, 24)}`,
       },
     })
       .then((res) => {
         if (res.data) {
-          alert("공지사항을 작성했습니다.");
+          alert("공지사항을 수정했습니다.");
           return (window.location.href = "/notice");
         }
       })
@@ -100,4 +95,4 @@ const WriteContainerWrapper = css`
   }
 `;
 
-export default NoticeWriteContainer;
+export default NoticeUpdateContainer;

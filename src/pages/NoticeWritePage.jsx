@@ -1,12 +1,16 @@
 import React from "react";
 import { PageTemplate } from "../components";
-import { NoticeWriteContainer } from "../containers";
+import { NoticeWriteContainer, NoticeUpdateContainer } from "../containers";
 
 const NoticeWritePage = ({ match }) => {
   const notice_Number = match.params.id;
   return (
     <PageTemplate>
-      <NoticeWriteContainer notice_Number={notice_Number} />
+      {notice_Number ? (
+        <NoticeUpdateContainer notice_Number={notice_Number} />
+      ) : (
+        <NoticeWriteContainer />
+      )}
     </PageTemplate>
   );
 };

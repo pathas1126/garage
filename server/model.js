@@ -35,7 +35,6 @@ module.exports = {
           if (querySnapshot.size > 0) {
             const data = [];
             querySnapshot.forEach((doc) => {
-              console.log(doc.data());
               data.push(doc.data());
             });
             const resArr = data.sort((a, b) => b.item_Number - a.item_Number);
@@ -75,7 +74,6 @@ module.exports = {
             querySnapshot.forEach((doc) => {
               // 데이터에 포함된 이미지 파일 삭제
               const { item_Picture } = doc.data();
-              console.log(item_Picture);
               if (item_Picture) {
                 fs.unlink(`public/${item_Picture}`, (err) => {
                   if (err) throw err;
@@ -280,7 +278,6 @@ module.exports = {
         });
     },
     detail: (data, callback) => {
-      console.log(data);
       firestore
         .collection("notice")
         .where("notice_Number", "==", Number(data))
@@ -288,7 +285,6 @@ module.exports = {
         .then((querySnapshot) => {
           if (querySnapshot.size > 0) {
             querySnapshot.forEach((doc) => {
-              console.log(doc.data());
               callback(doc.data());
             });
           }
@@ -298,7 +294,6 @@ module.exports = {
         });
     },
     readcount: (data, callback) => {
-      console.log(data);
       const { notice_Number, notice_Readcount } = data;
       firestore
         .collection("notice")
@@ -311,6 +306,24 @@ module.exports = {
                 ...doc.data(),
                 notice_Readcount: notice_Readcount + 1,
               });
+              callback(true);
+            });
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+    update: (noticeData, callback) => {
+      const { notice_Number } = noticeData;
+      firestore
+        .collection("notice")
+        .where("notice_Number", "==", notice_Number)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              doc.ref.set(noticeData);
               callback(true);
             });
           }

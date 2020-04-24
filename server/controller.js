@@ -126,6 +126,12 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    update: (req, res) => {
+      const noticeData = req.body;
+      model.notice.update(noticeData, (result) => {
+        if (result) res.send(result);
+      });
+    },
     delete: (req, res) => {
       const { notice_Number } = req.body;
       model.notice.delete(notice_Number, (result) => {

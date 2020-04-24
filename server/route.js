@@ -65,6 +65,9 @@ router.post("/notice", controller.notice.write);
 // 공지사항 조회수 올리기
 router.post("/notice/readcount", controller.notice.readcount);
 
+// 공지사항 수정
+router.put("/notice/:id", controller.notice.update);
+
 // 공지사항 글 삭제
 router.post("/notice/d", controller.notice.delete);
 module.exports = router;
