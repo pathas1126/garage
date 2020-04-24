@@ -98,7 +98,7 @@ const Detail = (props) => {
               글 삭제
             </Button>
           </div>
-        )}{" "}
+        )}
       </footer>
     </section>
   );
@@ -163,8 +163,7 @@ const footerStyle = css`
   width: 81%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
+  justify-content: center;
   a {
     text-decoration: none;
     margin-right: 1rem;

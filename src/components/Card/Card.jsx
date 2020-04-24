@@ -35,6 +35,7 @@ const Card = ({
           </fieldset>
         </div>
         <div css={bottomStyle}>
+          <span>{item_Price}</span>
           <Link to={`/sales/detail/${item_Number}`}>
             <Button variation="noborder">더 보기</Button>
           </Link>
@@ -111,9 +112,13 @@ const infoStyle = css`
 `;
 
 const bottomStyle = css`
-  display: flex;
-  justify-content: flex-end;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    text-indent: 1.1rem;
+  }
   a {
     text-decoration: none;
   }

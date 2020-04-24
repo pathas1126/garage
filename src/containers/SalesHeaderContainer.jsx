@@ -1,13 +1,13 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { Input, Button, Form, Select } from "../components";
+import { Input, Button, Select } from "../components";
 import { useContext, useState } from "react";
 import { LoginContext } from "../store";
 import { fetchData } from "../library";
 
 const SalesHeaderContainer = ({ setItems, setSearching }) => {
   const [searchData, setSearchData] = useState({
-    searchText: "기타",
+    searchText: "",
     searchType: "악기",
   });
 
@@ -83,12 +83,11 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
           <Select
             name="searchText"
             value={["기타", "베이스", "드럼", "키보드"]}
-            width="50%"
+            width="45%"
             onChange={getValues}
           ></Select>
         ) : (
           <Input
-            value={searchData.searchText}
             onChange={getValues}
             placeholder="검색 내용을 입력하세요."
             name="searchText"
@@ -107,8 +106,8 @@ const SalesHeaderContainer = ({ setItems, setSearching }) => {
 };
 
 const SalesHeaderWrapper = css`
-  width: 100%;
-  min-width: 33rem;
+  width: 80%;
+  min-width: 30rem;
   margin: 1rem auto;
   display: flex;
   align-items: center;
@@ -116,12 +115,14 @@ const SalesHeaderWrapper = css`
   a {
     text-decoration: none;
   }
+  form + button {
+    margin-left: -1rem;
+  }
 `;
 
 const searchWrapper = css`
   width: 40%;
   min-width: 25rem;
-  margin-right: 1rem;
   display: flex;
   justify-content: space-evenly;
 `;
