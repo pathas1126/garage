@@ -5,7 +5,7 @@ import { Input, Button, Form } from "../components";
 import { COLORS } from "../assets/colors";
 import { fetchData } from "../library";
 
-const NoticeWriteContainer = () => {
+const NoticeWriteContainer = ({ notice_Number }) => {
   const [noticePost, setNoticePost] = useState({
     notice_Number: Date.now(),
     manager_Id: sessionStorage.getItem("user_Name"),
@@ -23,6 +23,14 @@ const NoticeWriteContainer = () => {
       return (window.location.href = "/");
     }
   }, []);
+
+  useEffect(() => {
+    fetchData({ method: "GET", url: `/notice/${notice_Number}` }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
+  }, [notice_Number]);
 
   const setValues = (e) => {
     const { name, value } = e.target;

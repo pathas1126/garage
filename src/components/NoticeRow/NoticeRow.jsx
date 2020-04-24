@@ -67,9 +67,11 @@ const NoticeRow = ({
           <span>{manager_Id}</span>
           {admin && (
             <Fragment>
-              <Button variation="outline" color="secondary">
-                수정
-              </Button>
+              <Link to={`/notice/update/${notice_Number}`}>
+                <Button variation="outline" color="secondary">
+                  수정
+                </Button>
+              </Link>
               <Button
                 variation="outline"
                 color="warning"
@@ -120,7 +122,10 @@ const rowStyle = css`
   button {
     margin-left: 3rem;
   }
-  button + button {
+  a {
+    text-decoration: none;
+  }
+  a + button {
     margin-left: 1rem;
   }
 `;

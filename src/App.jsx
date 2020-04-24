@@ -41,6 +41,7 @@ function App() {
           <Route path="/sales" component={SalesPage} />
         </Switch>
         <Switch>
+          <Route path="/notice/update/:id" component={NoticeWritePage} />
           <Route path="/notice/write" component={NoticeWritePage} />
           <Route path="/notice" component={NoticePage} />
         </Switch>

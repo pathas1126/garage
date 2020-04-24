@@ -279,6 +279,24 @@ module.exports = {
           throw err;
         });
     },
+    detail: (data, callback) => {
+      console.log(data);
+      firestore
+        .collection("notice")
+        .where("notice_Number", "==", Number(data))
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              console.log(doc.data());
+              callback(doc.data());
+            });
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
     readcount: (data, callback) => {
       console.log(data);
       const { notice_Number, notice_Readcount } = data;

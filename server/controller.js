@@ -120,6 +120,12 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    detail: (req, res) => {
+      const { id } = req.params;
+      model.notice.detail(id, (result) => {
+        if (result) res.send(result);
+      });
+    },
     delete: (req, res) => {
       const { notice_Number } = req.body;
       model.notice.delete(notice_Number, (result) => {

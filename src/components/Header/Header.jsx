@@ -3,7 +3,7 @@ import { jsx, css } from "@emotion/core";
 import { Button } from "../index";
 import { COLORS } from "../../assets/colors";
 import { Link } from "react-router-dom";
-import { useEffect, useContext, Fragment } from "react";
+import { useEffect, useContext } from "react";
 import { LoginContext } from "../../store";
 
 const Header = () => {
