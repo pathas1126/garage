@@ -23,9 +23,10 @@ const SalesReplyWriteContainer = ({ item_Number, setItem_Replies }) => {
   const writeReply = (e) => {
     e.preventDefault();
 
-    if (!JSON.parse(sessionStorage.getItem("logon")))
-      return alert("로그인이 필요합니다.");
-
+    if (!JSON.parse(sessionStorage.getItem("logon"))) {
+      alert("로그인이 필요합니다.");
+      return (window.location.href = "/login");
+    }
     const date = new Date();
 
     const data = {
