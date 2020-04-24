@@ -27,10 +27,16 @@ module.exports = {
         default:
           return null;
       }
-
       model.sales.item({ searchType, keyword }, (result) => {
         if (result) res.send(result);
       });
+    },
+    reply: {
+      write: (req, res) => {
+        model.sales.reply.write(req.body, (result) => {
+          if (result) res.send(result);
+        });
+      },
     },
     // 상품 상세 페이지
     detail: {

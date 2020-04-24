@@ -25,6 +25,7 @@ module.exports = {
           throw err;
         });
     },
+
     item: (data, callback) => {
       const { searchType, keyword } = data;
       firestore
@@ -44,10 +45,20 @@ module.exports = {
           }
         });
     },
-
+    // 댓글 작성
+    reply: {
+      write: (data, callback) => {
+        firestore.collection("item_reply").add({ ...data });
+        callback(true);
+      },
+    },
     // 상세 페이지
     detail: {
       item: (item_Id, callback) => {
+        const resObj = {
+          itemDetail: {},
+          itemReply: [],
+        };
         firestore
           .collection("items")
           .where("item_Number", "==", Number(item_Id))
@@ -58,11 +69,23 @@ module.exports = {
             }
             querySnapshot.forEach((doc) => {
               const resData = doc.data();
-              callback(resData);
+              resObj.itemDetail = resData;
             });
           })
           .catch((err) => {
             throw err;
+          });
+        firestore
+          .collection("item_reply")
+          .where("item_Number", "==", Number(item_Id))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              const replyArr = [];
+              querySnapshot.forEach((doc) => replyArr.push(doc.data()));
+              resObj.itemReply = replyArr;
+            }
+            callback(resObj);
           });
       },
       remove: (data, callback) => {

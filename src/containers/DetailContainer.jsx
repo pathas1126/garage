@@ -5,6 +5,7 @@ import { fetchData } from "../library";
 const DetailContainer = ({ data, item_Id }) => {
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(false);
+  const [item_Replies, setItem_Replies] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -13,8 +14,9 @@ const DetailContainer = ({ data, item_Id }) => {
       url: `/sales/detail/item/${item_Id}`,
     })
       .then((data) => {
-        console.log(data);
-        setItem((prevItem) => data.data);
+        const { itemDetail, itemReply } = data.data;
+        setItem_Replies((prevReplies) => itemReply);
+        setItem((prevItem) => itemDetail);
         setLoading(false);
       })
       .catch((err) => {
@@ -29,6 +31,8 @@ const DetailContainer = ({ data, item_Id }) => {
       {loading && <Loader />}
       {!loading && (
         <Detail
+          setItem_Replies={setItem_Replies}
+          item_Replies={item_Replies}
           item_Number={item.item_Number}
           user_Id={item.user_Id}
           item_Writer={item.item_Writer}

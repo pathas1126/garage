@@ -38,6 +38,9 @@ router.post("/sales/detail/remove", controller.sales.detail.remove);
 
 router.put("/sales/detail/update", controller.sales.detail.update);
 
+// 상품 댓글 작성
+router.post("/sales/write/reply", controller.sales.reply.write);
+
 // 로그인 페이지 라우트
 router.post("/users/login", controller.users.login);
 

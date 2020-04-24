@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { LoginContext } from "../../store";
 import { Link } from "react-router-dom";
 import { fetchData } from "../../library";
+import { SalesReplyContainer } from "../../containers";
 
 const Detail = (props) => {
   const {
@@ -21,6 +22,8 @@ const Detail = (props) => {
     item_Name,
     item_Picture,
     item_Date,
+    item_Replies,
+    setItem_Replies,
   } = props;
 
   const { loginStatus } = useContext(LoginContext);
@@ -82,7 +85,15 @@ const Detail = (props) => {
           </tr>
         </tbody>
       </table>
-      <p css={detailStyle}>{item_Detail}</p>
+      <fieldset css={detailStyle}>
+        <legend>본문 내용</legend>
+        <p>{item_Detail}</p>
+      </fieldset>
+      <SalesReplyContainer
+        item_Number={item_Number}
+        item_Replies={item_Replies}
+        setItem_Replies={setItem_Replies}
+      />
       <footer css={footerStyle}>
         <Button onClick={() => window.history.go(-1)} variation="outline">
           돌아가기
@@ -108,7 +119,7 @@ const detailWrapperStyle = css`
   margin: 1rem auto;
   padding-bottom: 1rem;
   width: 50%;
-  min-width: 25rem;
+  min-width: 29rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,6 +164,7 @@ const infoStyle = css`
 `;
 
 const detailStyle = css`
+  margin-bottom: 2rem;
   width: 80%;
   padding: 0.3rem;
   border: 1px solid ${COLORS.primary};
@@ -160,10 +172,11 @@ const detailStyle = css`
 `;
 
 const footerStyle = css`
-  width: 81%;
+  margin-top: 1rem;
+  width: 83%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   a {
     text-decoration: none;
     margin-right: 1rem;
