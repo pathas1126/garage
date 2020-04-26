@@ -4,7 +4,8 @@ import { jsx, css } from "@emotion/core";
 const Footer = () => {
   return (
     <footer css={setStyle()}>
-      <h1>935 GARAGE PROJECT</h1>
+      <h1>GARAGE_935</h1>
+      <h4>KIC TEAM PROJECT</h4>
     </footer>
   );
 };
@@ -14,10 +15,12 @@ const setStyle = () => {
     width: 100%;
     height: 8rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: black;
-    h1 {
+    h1,
+    h4 {
       margin: 0;
       color: white;
     }

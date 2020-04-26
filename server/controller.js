@@ -37,6 +37,12 @@ module.exports = {
           if (result) res.send(result);
         });
       },
+      delete: (req, res) => {
+        const { id } = req.params;
+        model.sales.reply.delete(id, (result) => {
+          if (result) res.send(result);
+        });
+      },
     },
     // 상품 상세 페이지
     detail: {

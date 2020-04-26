@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Button } from "../index";
-import { COLORS } from "../../assets/colors";
 import { Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import { LoginContext } from "../../store";
@@ -36,6 +35,7 @@ const Header = () => {
 
   return (
     <header css={setStyle()}>
+      <img src="/images/header1.jpg" alt="상단 이미지" />
       <section>
         {admin && <span>관리자 로그인 중...</span>}
         {!logon && (
@@ -67,7 +67,9 @@ const Header = () => {
           </Link>
         )}
       </section>
-      <h1>HEADER</h1>
+      <Link to="/">
+        <h1>GARAGE</h1>
+      </Link>
     </header>
   );
 };
@@ -76,11 +78,20 @@ const setStyle = () => {
   const defaultStyle = css`
     position: relative;
     width: 100%;
-    height: 14rem;
+    height: 28rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${COLORS.teritiaty};
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 28rem;
+      z-index: -99;
+    }
+
     section {
       position: absolute;
       top: 0;
@@ -91,8 +102,16 @@ const setStyle = () => {
         text-decoration: none;
       }
     }
+
     h1 {
-      color: white;
+      color: #cdcdcd;
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      cursor: pointer;
+      &:active {
+        color: #dedede;
+      }
     }
   `;
   return [defaultStyle];

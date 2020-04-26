@@ -12,7 +12,10 @@ const SalesReplyContainer = ({
         item_Number={item_Number}
         setItem_Replies={setItem_Replies}
       />
-      <SalesReplyReadContainer item_Replies={item_Replies} />
+      <SalesReplyReadContainer
+        item_Replies={item_Replies}
+        setItem_Replies={setItem_Replies}
+      />
     </section>
   );
 };

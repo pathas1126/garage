@@ -10,7 +10,6 @@ export { Modal } from "./Modal";
 export { Input } from "./Input";
 export { Card } from "./Card";
 export { Loader } from "./Loader";
-export { Editor } from "./Editor";
 export { Form } from "./Form";
 export { Select } from "./Select";
 export { NoticeRow } from "./NoticeRow";

@@ -3,6 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
+import { fetchData } from "../../library";
 
 const Reply = ({
   item_Detail,
@@ -10,6 +11,7 @@ const Reply = ({
   item_Reply_date,
   item_Reply_writer,
   item_Rnumber,
+  setItem_Replies,
 }) => {
   const [sameUser, setSameUser] = useState(false);
 
@@ -23,8 +25,24 @@ const Reply = ({
   const onUpdate = () => {
     alert("수정 함수 구현");
   };
+
+  // 댓글 삭제 함수
   const onRemove = () => {
-    alert("삭제 함수 구현");
+    if (window.confirm("정말로 삭제하시겠습니까?"))
+      fetchData({
+        method: "POST",
+        url: `/sales/detail/item/${item_Rnumber}`,
+      })
+        .then((res) => {
+          if (res.data) {
+            setItem_Replies((prevReplies) =>
+              prevReplies.filter((reply) => reply.item_Rnumber !== item_Rnumber)
+            );
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
   };
 
   return (

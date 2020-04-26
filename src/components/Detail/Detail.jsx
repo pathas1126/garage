@@ -49,7 +49,7 @@ const Detail = (props) => {
 
   return (
     <section css={detailWrapperStyle}>
-      <img src={item_Picture} alt="" />
+      <img src={item_Picture || "/images/default.png"} alt="상품 설명 사진" />
       <header css={headerStyle}>
         <h1>{item_Name}</h1>
       </header>
@@ -128,7 +128,9 @@ const detailWrapperStyle = css`
   color: ${COLORS.teritiaty};
   img {
     padding: 2rem;
-    width: 80%;
+    width: 75%;
+    margin: 3rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   }
   &:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.7);

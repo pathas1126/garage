@@ -51,6 +51,23 @@ module.exports = {
         firestore.collection("item_reply").add({ ...data });
         callback(true);
       },
+      delete: (data, callback) => {
+        console.log("11111", data);
+        firestore
+          .collection("item_reply")
+          .where("item_Rnumber", "==", Number(data))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                doc.ref.delete();
+                callback(true);
+              });
+            } else {
+              callback(false);
+            }
+          });
+      },
     },
     // 상세 페이지
     detail: {

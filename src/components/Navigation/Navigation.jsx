@@ -10,22 +10,30 @@ const Navigation = () => {
       <ul>
         <li>
           <Link to="/">
-            <Button>MAIN</Button>
+            <Button variation="noborder" color="teritiaty">
+              MAIN
+            </Button>
           </Link>
         </li>
         <li>
           <Link to="/sales">
-            <Button>SALES</Button>
+            <Button variation="noborder" color="teritiaty">
+              SALES
+            </Button>
           </Link>
         </li>
         <li>
           <Link to="/notice">
-            <Button>NOTICE</Button>
+            <Button variation="noborder" color="teritiaty">
+              NOTICE
+            </Button>
           </Link>
         </li>
         <li>
           <Link to="/qna">
-            <Button>QnA</Button>
+            <Button variation="noborder" color="teritiaty">
+              QnA
+            </Button>
           </Link>
         </li>
       </ul>
@@ -35,12 +43,15 @@ const Navigation = () => {
 
 const setStyle = () => {
   const defaultStyle = css`
-    width: 100%;
+    margin: 0 auto;
+    width: 99%;
     height: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${COLORS.primary};
+    background: transparent;
+    border-bottom: 1px solid #dedede;
+    z-index: 11;
     ul {
       width: 80%;
       list-style: none;
@@ -51,6 +62,9 @@ const setStyle = () => {
       a {
         text-decoration: none;
       }
+    }
+    button {
+      font-weight: 600;
     }
   `;
   return [defaultStyle];

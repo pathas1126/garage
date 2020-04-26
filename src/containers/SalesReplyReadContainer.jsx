@@ -1,7 +1,7 @@
 import React from "react";
 import { Reply } from "../components";
 
-const SalesReplyReadContainer = ({ item_Replies }) => {
+const SalesReplyReadContainer = ({ item_Replies, setItem_Replies }) => {
   return (
     <section>
       {item_Replies
@@ -14,6 +14,7 @@ const SalesReplyReadContainer = ({ item_Replies }) => {
             item_Reply_date={reply.item_Reply_date}
             item_Reply_writer={reply.item_Reply_writer}
             item_Rnumber={reply.item_Rnumber}
+            setItem_Replies={setItem_Replies}
           />
         ))}
     </section>
