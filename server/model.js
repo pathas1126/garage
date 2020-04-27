@@ -413,5 +413,25 @@ module.exports = {
       firestore.collection("qna").add({ ...data });
       callback(true);
     },
+    list: (data, callback) => {
+      const page = Number(data.page);
+      const tmpArr = [];
+      firestore
+        .collection("qna")
+        .get()
+        .then((docs) => {
+          docs.forEach((doc) => {
+            tmpArr.push(doc.data());
+          });
+          const resArr = tmpArr
+            .sort((a, b) => b.qna_Date - a.qna_Date)
+            .slice((page - 1) * 10, (page - 1) * 10 + 10);
+          const maxPage = Math.ceil(tmpArr.length / 10);
+          callback({ resArr, maxPage });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
   },
 };

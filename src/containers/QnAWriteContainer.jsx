@@ -52,7 +52,6 @@ const QnAWriteContainer = () => {
         if (res.data) {
           setQnaData({
             qna_Number: 0,
-            qna_Writer: "",
             qna_Password: "",
             qna_Subject: "",
             qna_Content: "",

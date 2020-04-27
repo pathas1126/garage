@@ -83,3 +83,6 @@ module.exports = router;
 
 // QNA 글 등록
 router.post("/qna", controller.qna.write);
+
+// QNA 글 목록 조회
+router.get("/qna", controller.qna.list);

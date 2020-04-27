@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import QnAWriteContainer from "./QnAWriteContainer";
+import QnAReadContainer from "./QnAReadContainer";
 
 const QnAContainer = () => {
   return (
     <section>
       <QnAWriteContainer />
+      <QnAReadContainer />
     </section>
   );
 };

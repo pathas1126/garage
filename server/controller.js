@@ -164,5 +164,11 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    list: (req, res) => {
+      const data = req.query;
+      model.qna.list(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
   },
 };
