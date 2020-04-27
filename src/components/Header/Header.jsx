@@ -104,10 +104,11 @@ const setStyle = () => {
     }
 
     h1 {
+      margin: 0;
       color: #cdcdcd;
       position: absolute;
       top: 0;
-      left: 2rem;
+      left: 1rem;
       cursor: pointer;
       &:active {
         color: #dedede;

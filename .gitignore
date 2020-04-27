@@ -24,3 +24,6 @@ yarn-error.log*
 
 # db config
 /server/firebase.js
+
+# API_KEY
+/src/assets/keys

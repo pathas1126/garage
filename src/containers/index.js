@@ -14,3 +14,4 @@ export { default as NoticeUpdateContainer } from "./NoticeUpdateContainer";
 export { default as SalesReplyContainer } from "./SalesReplyContainer";
 export { default as SalesReplyReadContainer } from "./SalesReplyReadContainer";
 export { default as SalesReplyWriteContainer } from "./SalesReplyWriteContainer";
+export { default as ContactContainer } from "./ContactContainer";
