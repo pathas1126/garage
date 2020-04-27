@@ -4,7 +4,7 @@ import { Input, Button } from "../components";
 import { useState, useEffect, Fragment } from "react";
 import { fetchData } from "../library";
 
-const QnAWriteContainer = () => {
+const QnAWriteContainer = ({ qna, setQna }) => {
   const [qnaData, setQnaData] = useState({
     qna_Number: 0,
     qna_Writer: "",
@@ -14,6 +14,7 @@ const QnAWriteContainer = () => {
     qna_Date: "",
   });
   const [haveSession, setHaveSession] = useState(false);
+  const [qna_Writer_Fixed, setQna_Writer_Fixed] = useState("");
 
   const { qna_Writer, qna_Password, qna_Subject, qna_Content } = qnaData;
 
@@ -29,6 +30,7 @@ const QnAWriteContainer = () => {
         ...prevQna,
         qna_Writer: sessionName,
       }));
+      setQna_Writer_Fixed(sessionName);
       setHaveSession(true);
     }
   }, []);
@@ -37,26 +39,37 @@ const QnAWriteContainer = () => {
     e.preventDefault();
 
     const date = new Date();
+    const data = {
+      ...qnaData,
+      qna_Number: Date.now(),
+      qna_Date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date
+        .toString()
+        .slice(16, 24)}`,
+    };
     fetchData({
       method: "POST",
       url: "qna",
-      data: {
-        ...qnaData,
-        qna_Number: Date.now(),
-        qna_Date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date
-          .toString()
-          .slice(16, 24)}`,
-      },
+      data,
     })
       .then((res) => {
         if (res.data) {
+          setQna((prevQna) => [data].concat(prevQna));
           setQnaData({
             qna_Number: 0,
             qna_Password: "",
             qna_Subject: "",
             qna_Content: "",
             qna_Date: "",
+            qna_Writer: "",
           });
+
+          const sessionName = sessionStorage.getItem("user_Name");
+          if (sessionName) {
+            setQnaData((prevQna) => ({
+              ...prevQna,
+              qna_Writer: sessionName,
+            }));
+          }
           alert("질문을 등록했습니다.");
         }
       })
@@ -79,7 +92,7 @@ const QnAWriteContainer = () => {
         <div>
           <label htmlFor="qna_Writer">닉네임</label>
           {haveSession ? (
-            <span>{qna_Writer}</span>
+            <span>{qna_Writer_Fixed}</span>
           ) : (
             <Fragment>
               <Input
@@ -107,7 +120,12 @@ const QnAWriteContainer = () => {
           onChange={getValues}
           placeholder="질문하실 내용을 입력하세요."
         ></textarea>
-        <Button variation="outline" color="teritiaty" type="submit">
+        <Button
+          variation="outline"
+          color="teritiaty"
+          type="submit"
+          width="100%"
+        >
           등록하기
         </Button>
       </form>
@@ -117,6 +135,7 @@ const QnAWriteContainer = () => {
 
 const sectionWrapper = css`
   width: 70%;
+  min-width: 25rem;
   padding: 2rem;
   max-width: 40rem;
   margin: 1rem auto;

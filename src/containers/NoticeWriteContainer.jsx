@@ -35,7 +35,6 @@ const NoticeWriteContainer = ({ notice_Number }) => {
   const setValues = (e) => {
     const { name, value } = e.target;
     setNoticePost((prevPost) => ({ ...prevPost, [name]: value }));
-    console.log(noticePost);
   };
 
   const onSubmit = (e) => {

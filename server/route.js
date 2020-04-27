@@ -86,3 +86,9 @@ router.post("/qna", controller.qna.write);
 
 // QNA 글 목록 조회
 router.get("/qna", controller.qna.list);
+
+// QNA 글 삭제
+router.post("/qna/d/:id", controller.qna.delete);
+
+// QNA 글 수정
+router.put("/qna/:id", controller.qna.update);

@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import QnAWriteContainer from "./QnAWriteContainer";
 import QnAReadContainer from "./QnAReadContainer";
 
 const QnAContainer = () => {
+  const [qna, setQna] = useState([]);
   return (
     <section>
-      <QnAWriteContainer />
-      <QnAReadContainer />
+      <QnAWriteContainer qna={qna} setQna={setQna} />
+      <QnAReadContainer qna={qna} setQna={setQna} />
     </section>
   );
 };

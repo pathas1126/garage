@@ -15,6 +15,8 @@ export { Select } from "./Select";
 export { NoticeRow } from "./NoticeRow";
 export { Reply } from "./Reply";
 export { ContactUs } from "./ContactUs";
+export { QnA } from "./QnA";
+export { QnADetail } from "./QnADetail";
 
 // 페이지 컴포넌트
 export { Detail } from "./Detail";

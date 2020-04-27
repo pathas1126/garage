@@ -170,5 +170,18 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    delete: (req, res) => {
+      const { qna_Number } = req.body;
+      model.qna.delete(qna_Number, (result) => {
+        if (result) res.send(result);
+      });
+    },
+    update: (req, res) => {
+      const { id } = req.params;
+      const data = req.body;
+      model.qna.update({ id, data }, (result) => {
+        if (result) res.send(result);
+      });
+    },
   },
 };

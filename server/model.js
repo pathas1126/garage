@@ -71,7 +71,6 @@ module.exports = {
       },
 
       delete: (data, callback) => {
-        console.log("11111", data);
         firestore
           .collection("item_reply")
           .where("item_Rnumber", "==", Number(data))
@@ -424,13 +423,44 @@ module.exports = {
             tmpArr.push(doc.data());
           });
           const resArr = tmpArr
-            .sort((a, b) => b.qna_Date - a.qna_Date)
+            .sort((a, b) => b.qna_Number - a.qna_Number)
             .slice((page - 1) * 10, (page - 1) * 10 + 10);
           const maxPage = Math.ceil(tmpArr.length / 10);
           callback({ resArr, maxPage });
         })
         .catch((err) => {
           throw err;
+        });
+    },
+    delete: (data, callback) => {
+      firestore
+        .collection("qna")
+        .where("qna_Number", "==", Number(data))
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => doc.ref.delete());
+            callback(true);
+          } else {
+            callback(false);
+          }
+        });
+    },
+    update: (updateData, callback) => {
+      const { id, data } = updateData;
+      firestore
+        .collection("qna")
+        .where("qna_Number", "==", Number(id))
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size > 0) {
+            querySnapshot.forEach((doc) => {
+              doc.ref.set({ ...data });
+              callback(true);
+            });
+          } else {
+            callback(false);
+          }
         });
     },
   },

@@ -12,12 +12,14 @@ const Button = ({
   variation,
   width,
   type = "button",
+  disabled,
 }) => {
   return (
     <button
-      css={setStyle({ color, size, variation, width })}
+      css={setStyle({ color, size, variation, width, disabled })}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
@@ -25,7 +27,7 @@ const Button = ({
 };
 
 // 스타일 설정 함수
-const setStyle = ({ color, size, variation, width }) => {
+const setStyle = ({ color, size, variation, width, disabled }) => {
   // 사이즈 객체
   const SIZES = {
     small: css`
@@ -96,8 +98,18 @@ const setStyle = ({ color, size, variation, width }) => {
       margin-left: 3rem;
     }
   `;
+
+  const disabledStyle = css`
+    cursor: default;
+  `;
   // width는 인라인으로 직접 적용하는 것이기 때문에 객체로 리턴
-  return [defaultStyle, SIZES[size], VARIATIONS[variation], { width }];
+  return [
+    defaultStyle,
+    SIZES[size],
+    VARIATIONS[variation],
+    { width },
+    disabled && disabledStyle,
+  ];
 };
 
 // 버튼 컴포넌트에서 받는 Props 관리
