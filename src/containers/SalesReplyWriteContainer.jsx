@@ -107,7 +107,7 @@ const ReplyWriteWrapper = css`
     display: flex;
     justify-content: flex-end;
     button {
-      font-size: 0.8rem;
+      font-size: 0.6rem;
     }
   }
 `;

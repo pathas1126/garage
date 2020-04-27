@@ -41,6 +41,9 @@ router.put("/sales/detail/update", controller.sales.detail.update);
 // 상품 댓글 작성
 router.post("/sales/write/reply", controller.sales.reply.write);
 
+// 댓글 수정
+router.put("/sales/detail/upload/reply", controller.sales.reply.update);
+
 // 댓글 삭제
 router.post("/sales/detail/item/:id", controller.sales.reply.delete);
 

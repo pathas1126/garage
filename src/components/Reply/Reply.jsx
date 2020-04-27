@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { fetchData } from "../../library";
+import { Button } from "../index";
 
 const Reply = ({
   item_Detail,
@@ -15,6 +16,15 @@ const Reply = ({
 }) => {
   const [sameUser, setSameUser] = useState(false);
 
+  const [updating, setUpdating] = useState(false);
+
+  const [newItem_Detail, setNewItem_Detail] = useState(item_Detail);
+
+  const getValues = (e) => {
+    const { value } = e.target;
+    setNewItem_Detail(value);
+  };
+
   useEffect(() => {
     const currentUser = sessionStorage.getItem("user_Name");
     if (item_Reply_writer === currentUser) {
@@ -23,7 +33,25 @@ const Reply = ({
   }, [item_Reply_writer]);
 
   const onUpdate = () => {
-    alert("수정 함수 구현");
+    setUpdating(true);
+  };
+
+  // 댓글 수정 함수
+  const onSubmit = (e) => {
+    e.preventDefault();
+    fetchData({
+      method: "PUT",
+      url: "/sales/detail/upload/reply",
+      data: { item_Detail: newItem_Detail, item_Rnumber },
+    })
+      .then((res) => {
+        setNewItem_Detail(newItem_Detail);
+        alert("댓글 수정을 완료했습니다.");
+        setUpdating(false);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   // 댓글 삭제 함수
@@ -60,10 +88,30 @@ const Reply = ({
           </div>
         )}
       </header>
-      <p>{item_Detail}</p>
-      <footer>
-        <span>{item_Reply_date}</span>
-      </footer>
+      {!updating ? (
+        <Fragment>
+          <p>{newItem_Detail}</p>
+          <footer>
+            <span>{item_Reply_date}</span>
+          </footer>
+        </Fragment>
+      ) : (
+        <form onSubmit={onSubmit}>
+          <textarea
+            name="newItem_Detail"
+            value={newItem_Detail}
+            onChange={getValues}
+          ></textarea>
+          <Button
+            variation="noborder"
+            size="small"
+            type="submit"
+            color="teritiaty"
+          >
+            수정 완료
+          </Button>
+        </form>
+      )}
     </article>
   );
 };
@@ -95,6 +143,23 @@ const ReplyWrapper = css`
   footer {
     text-align: right;
     font-size: 0.8rem;
+  }
+
+  form {
+    margin: 1rem auto;
+    position: relative;
+    width: 99%;
+    textarea {
+      width: 98.5%;
+      height: 4rem;
+      resize: none;
+    }
+    button {
+      position: absolute;
+      bottom: 0.2rem;
+      right: 0;
+      font-size: 0.8rem;
+    }
   }
 `;
 export default Reply;

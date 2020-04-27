@@ -43,6 +43,12 @@ module.exports = {
           if (result) res.send(result);
         });
       },
+      update: (req, res) => {
+        const data = req.body;
+        model.sales.reply.update(data, (result) => {
+          if (result) res.send(result);
+        });
+      },
     },
     // 상품 상세 페이지
     detail: {

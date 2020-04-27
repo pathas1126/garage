@@ -51,6 +51,25 @@ module.exports = {
         firestore.collection("item_reply").add({ ...data });
         callback(true);
       },
+      update: (data, callback) => {
+        const { item_Rnumber, item_Detail } = data;
+        firestore
+          .collection("item_reply")
+          .where("item_Rnumber", "==", Number(item_Rnumber))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                doc.ref.set({ ...data, item_Detail });
+                callback(true);
+              });
+            } else {
+              callback(false);
+            }
+          });
+      },
+
       delete: (data, callback) => {
         console.log("11111", data);
         firestore
