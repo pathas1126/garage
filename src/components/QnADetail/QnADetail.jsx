@@ -48,22 +48,23 @@ const QnADetail = ({
   };
 
   const onRemove = () => {
-    fetchData({
-      method: "POST",
-      url: `/qna/d/${qna_Number}`,
-      data: { qna_Number },
-    })
-      .then((res) => {
-        if (res.data) {
-          setQna((prevQna) =>
-            prevQna.filter((v) => v.qna_Number !== qna_Number)
-          );
-          alert("댓글이 정상적으로 삭제되었습니다.");
-        }
+    if (window.confirm("정말로 삭제하시겠습니까?"))
+      fetchData({
+        method: "POST",
+        url: `/qna/d/${qna_Number}`,
+        data: { qna_Number },
       })
-      .catch((err) => {
-        throw err;
-      });
+        .then((res) => {
+          if (res.data) {
+            setQna((prevQna) =>
+              prevQna.filter((v) => v.qna_Number !== qna_Number)
+            );
+            alert("댓글이 정상적으로 삭제되었습니다.");
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
   };
 
   return (
