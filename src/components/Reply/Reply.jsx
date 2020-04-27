@@ -25,16 +25,16 @@ const Reply = ({
     setNewItem_Detail(value);
   };
 
+  const onUpdate = () => {
+    setUpdating(true);
+  };
+
   useEffect(() => {
     const currentUser = sessionStorage.getItem("user_Name");
     if (item_Reply_writer === currentUser) {
       setSameUser(true);
     }
   }, [item_Reply_writer]);
-
-  const onUpdate = () => {
-    setUpdating(true);
-  };
 
   // 댓글 수정 함수
   const onSubmit = (e) => {
@@ -102,14 +102,27 @@ const Reply = ({
             value={newItem_Detail}
             onChange={getValues}
           ></textarea>
-          <Button
-            variation="noborder"
-            size="small"
-            type="submit"
-            color="teritiaty"
-          >
-            수정 완료
-          </Button>
+          <div>
+            <Button
+              variation="noborder"
+              size="small"
+              color="teritiaty"
+              onClick={() => {
+                setNewItem_Detail(item_Detail);
+                setUpdating(false);
+              }}
+            >
+              취소
+            </Button>
+            <Button
+              variation="noborder"
+              size="small"
+              type="submit"
+              color="teritiaty"
+            >
+              수정 완료
+            </Button>
+          </div>
         </form>
       )}
     </article>
@@ -127,6 +140,9 @@ const ReplyWrapper = css`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    & > span {
+      font-weight: 600;
+    }
     div > span {
       cursor: pointer;
       & + span {
@@ -154,12 +170,20 @@ const ReplyWrapper = css`
       height: 4rem;
       resize: none;
     }
-    button {
+    div {
       position: absolute;
-      bottom: 0.2rem;
+      bottom: -1.8rem;
       right: 0;
-      font-size: 0.8rem;
+      button {
+        font-size: 0.8rem;
+        & + button {
+          margin-left: 1rem;
+        }
+      }
     }
+  }
+  p {
+    font-size: 0.9rem;
   }
 `;
 export default Reply;
