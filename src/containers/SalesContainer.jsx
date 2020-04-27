@@ -36,8 +36,13 @@ const SalesContainer = () => {
     const loaderCurrent = loaderRef.current;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0.09) {
-          setPage((prevPage) => prevPage + 1);
+        if (entry.isIntersecting) {
+          let timer;
+          if (!timer) {
+            timer = setTimeout(() => {
+              setPage((prevPage) => prevPage + 1);
+            }, 300);
+          }
         }
       });
     });
