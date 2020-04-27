@@ -15,3 +15,5 @@ export { default as SalesReplyContainer } from "./SalesReplyContainer";
 export { default as SalesReplyReadContainer } from "./SalesReplyReadContainer";
 export { default as SalesReplyWriteContainer } from "./SalesReplyWriteContainer";
 export { default as ContactContainer } from "./ContactContainer";
+export { default as QnAContainer } from "./QnAContainer";
+export { default as QnAWriteContainer } from "./QnAWriteContainer";

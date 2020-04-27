@@ -80,3 +80,6 @@ router.put("/notice/:id", controller.notice.update);
 // 공지사항 글 삭제
 router.post("/notice/d", controller.notice.delete);
 module.exports = router;
+
+// QNA 글 등록
+router.post("/qna", controller.qna.write);

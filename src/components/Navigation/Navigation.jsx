@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Link } from "react-router-dom";
-import { COLORS } from "../../assets/colors";
 import { Button } from "../index";
 
 const Navigation = () => {

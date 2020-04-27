@@ -157,4 +157,12 @@ module.exports = {
       });
     },
   },
+  qna: {
+    write: (req, res) => {
+      const data = req.body;
+      model.qna.write(data, (result) => {
+        if (result) res.send(result);
+      });
+    },
+  },
 };

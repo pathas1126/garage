@@ -408,4 +408,10 @@ module.exports = {
         });
     },
   },
+  qna: {
+    write: (data, callback) => {
+      firestore.collection("qna").add({ ...data });
+      callback(true);
+    },
+  },
 };
