@@ -293,7 +293,7 @@ module.exports = {
               .sort((a, b) => {
                 return b.item_Number - a.item_Number;
               })
-              .slice(0, 8);
+              .slice(0, 10);
             callback(resPosts);
           }
         })

@@ -35,7 +35,7 @@ function App() {
       />
       <LoginProvider>
         {/* ROUTE 설정 */}
-        <Route exact path="/" component={MainPage} />
+        <Route exact path="/" component={SalesPage} />
         <Switch>
           <Route path="/sales/detail/:id/update" component={ItemUpdatePage} />
           <Route path="/sales/detail/:id" component={DetailPage} />

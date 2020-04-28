@@ -8,13 +8,6 @@ const Navigation = () => {
     <nav css={setStyle()}>
       <ul>
         <li>
-          <Link to="/">
-            <Button variation="noborder" color="teritiaty">
-              MAIN
-            </Button>
-          </Link>
-        </li>
-        <li>
           <Link to="/sales">
             <Button variation="noborder" color="teritiaty">
               SALES

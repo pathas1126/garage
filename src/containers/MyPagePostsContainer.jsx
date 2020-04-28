@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { fetchData } from "../library";
 import CardContainer from "./CardContainer";
-import { Button } from "../components";
+import { Button, Loader } from "../components";
+import { Link } from "react-router-dom";
 
 const MyPagePostsContainer = ({ user_Id }) => {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData({
@@ -14,6 +16,7 @@ const MyPagePostsContainer = ({ user_Id }) => {
       .then((res) => {
         const { data } = res;
         setItems((prevItems) => prevItems.concat(data));
+        setLoading(false);
       })
       .catch((err) => {
         throw err;
@@ -31,25 +34,35 @@ const MyPagePostsContainer = ({ user_Id }) => {
     >
       <header
         style={{
+          width: "100%",
           display: "flex",
-          marginTop: "1rem",
-          justifyContent: "space-between",
+          flexDirection: "column",
+          margin: "2rem",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Button variation="outline" color="teritiaty">
-          상품
-        </Button>
-        <Button variation="outline" color="teritiaty">
-          후기
-        </Button>
-        <Button variation="outline" color="teritiaty">
-          QnA
-        </Button>
+        <h1 style={{ width: "100%", textAlign: "center" }}>
+          최근 10개의 게시글만 표시됩니다.
+        </h1>
       </header>
-      <h1 style={{ width: "100%", textAlign: "center" }}>
-        최근 8개의 게시글만 표시됩니다.
-      </h1>
-      <CardContainer data={items} />
+      {loading ? <Loader /> : <CardContainer data={items} />}
+      <footer
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          margin: "2rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Link to="/mypage" style={{ textDecoration: "none", width: "50%" }}>
+          <Button width="100%" color="secondary" variation="outline">
+            돌아가기
+          </Button>
+        </Link>
+      </footer>
     </section>
   );
 };
