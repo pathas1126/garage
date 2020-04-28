@@ -9,6 +9,7 @@ const Input = ({
   name,
   value,
   onChange,
+  onBlur,
   type = "text",
   required = false,
   noborder,
@@ -23,6 +24,7 @@ const Input = ({
       placeholder={placeholder}
       autoFocus={autoFocus}
       onChange={onChange}
+      onBlur={onBlur}
       required={required}
     ></input>
   );

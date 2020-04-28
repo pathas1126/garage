@@ -30,6 +30,8 @@ const QnA = ({
     if (password === qna_Password) {
       setShowInput(false);
       setUnlocked(true);
+    } else {
+      alert("비밀번호가 맞지 않습니다.");
     }
   };
 
@@ -46,6 +48,9 @@ const QnA = ({
                 value={password}
                 width="85%"
                 onChange={getPassword}
+                onBlur={() => {
+                  setShowInput(false);
+                }}
                 placeholder="비밀번호 입력 후 Enter"
               />
             </form>

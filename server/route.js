@@ -92,3 +92,12 @@ router.post("/qna/d/:id", controller.qna.delete);
 
 // QNA 글 수정
 router.put("/qna/:id", controller.qna.update);
+
+// QNA 댓글 작성
+router.post("/qna/:qna_Number", controller.qna.reply.write);
+
+// QNA 댓글 조회
+router.get("/qna/:qna_Number", controller.qna.reply.list);
+
+// QNA 댓글 삭제
+router.post("/qna/reply/:qna_Rnumber", controller.qna.reply.delete);

@@ -183,5 +183,26 @@ module.exports = {
         if (result) res.send(result);
       });
     },
+    reply: {
+      write: (req, res) => {
+        const { qna_Number } = req.params;
+        const qna_Reply_Data = req.body;
+        model.qna.reply.write({ qna_Number, qna_Reply_Data }, (result) => {
+          if (result) res.send(result);
+        });
+      },
+      list: (req, res) => {
+        const { qna_Number } = req.params;
+        model.qna.reply.list(qna_Number, (result) => {
+          if (result) res.send(result);
+        });
+      },
+      delete: (req, res) => {
+        const { qna_Rnumber } = req.params;
+        model.qna.reply.delete(qna_Rnumber, (result) => {
+          if (result) res.send(result);
+        });
+      },
+    },
   },
 };

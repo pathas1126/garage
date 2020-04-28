@@ -463,5 +463,69 @@ module.exports = {
           }
         });
     },
+    reply: {
+      write: (data, callback) => {
+        const { qna_Number, qna_Reply_Data } = data;
+        firestore
+          .collection("qna")
+          .where("qna_Number", "==", Number(qna_Number))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                firestore
+                  .collection("qna_reply")
+                  .add({ ...qna_Reply_Data })
+                  .catch((err) => {
+                    throw err;
+                  });
+                callback(true);
+              });
+            }
+          })
+          .catch((err) => {
+            throw err;
+          });
+      },
+      list: (qna_Number, callback) => {
+        firestore
+          .collection("qna_reply")
+          .where("qna_Number", "==", Number(qna_Number))
+          .get()
+          .then((querySnapshot) => {
+            const tmpArr = [];
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                tmpArr.push(doc.data());
+              });
+              const resArr = tmpArr.sort(
+                (a, b) => b.qna_Rnumber - a.qna_Rnumber
+              );
+              callback(resArr);
+            } else {
+              callback(false);
+            }
+          })
+          .catch((err) => {
+            throw err;
+          });
+      },
+      delete: (qna_Rnumber, callback) => {
+        firestore
+          .collection("qna_reply")
+          .where("qna_Rnumber", "==", Number(qna_Rnumber))
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                doc.ref.delete();
+              });
+              callback(true);
+            } else {
+              callback(false);
+            }
+          });
+      },
+    },
   },
 };

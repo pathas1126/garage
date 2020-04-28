@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 import { Button } from "../Button";
 import { fetchData } from "../../library";
 import { useState } from "react";
+import { QnAReplyContainer } from "../../containers";
 
 const QnADetail = ({
   qna_Content,
@@ -108,11 +109,13 @@ const QnADetail = ({
           삭제
         </Button>
       </footer>
+      <QnAReplyContainer qna_Number={qna_Number} qna_Writer={qna_Writer} />
     </article>
   );
 };
 
 const QnADetailStyle = css`
+  width: 100%;
   margin: 1rem auto;
   padding-bottom: 1rem;
 `;
