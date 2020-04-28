@@ -35,17 +35,16 @@ const QnAReply = ({
       </article>
       <footer css={footerStyle}>
         <span>{qna_Reply_date}</span>
-        {qna_Name === "관리자" ||
-          (qna_Name === qna_Writer && (
-            <Button
-              variation="outline"
-              onClick={onRemove}
-              size="small"
-              color="warning"
-            >
-              삭제
-            </Button>
-          ))}
+        {(qna_Name === "관리자" || qna_Name === qna_Writer) && (
+          <Button
+            variation="outline"
+            onClick={onRemove}
+            size="small"
+            color="warning"
+          >
+            삭제
+          </Button>
+        )}
       </footer>
     </section>
   );

@@ -1,7 +1,7 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
 import { Input } from "../Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../Button";
 import { FaLock, FaUnlockAlt } from "react-icons/fa";
 import { QnADetail } from "../QnADetail";
@@ -18,6 +18,7 @@ const QnA = ({
   const [unlocked, setUnlocked] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [password, setPassword] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const getPassword = (e) => {
     const { value } = e.target;
@@ -34,6 +35,12 @@ const QnA = ({
       alert("비밀번호가 맞지 않습니다.");
     }
   };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("admin")) {
+      setAdmin(sessionStorage.getItem("admin"));
+    }
+  }, []);
 
   return (
     <section css={QnAWrapperStyle}>
@@ -77,7 +84,8 @@ const QnA = ({
           )}
         </div>
       </header>
-      {unlocked || (
+
+      {(unlocked || admin) && (
         <QnADetail
           qna_Content={qna_Content}
           setQna={setQna}

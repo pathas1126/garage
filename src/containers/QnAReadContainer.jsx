@@ -1,14 +1,16 @@
 /**@jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { fetchData } from "../library";
-import { Button, QnA } from "../components";
+import { Button, QnA, Loader } from "../components";
 
 const QnAReadContainer = ({ qna, setQna }) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetchData({ method: "GET", url: `/qna?page=${page}` })
       .then((res) => {
         if (res.data) {
@@ -19,6 +21,7 @@ const QnAReadContainer = ({ qna, setQna }) => {
             tmpTotalpages.push(i);
           }
           setTotalPages((prevTotal) => tmpTotalpages);
+          setLoading(false);
         }
       })
       .catch((err) => {
@@ -29,32 +32,38 @@ const QnAReadContainer = ({ qna, setQna }) => {
   return (
     <section css={sectionWrapper}>
       <h1>등록된 질문</h1>
-      <article>
-        {qna.map((v) => (
-          <QnA
-            key={v.qna_Number}
-            qna_Number={v.qna_Number}
-            qna_Writer={v.qna_Writer}
-            qna_Password={v.qna_Password}
-            qna_Subject={v.qna_Subject}
-            qna_Content={v.qna_Content}
-            qna_Date={v.qna_Date}
-            setQna={setQna}
-          />
-        ))}
-      </article>
-      <footer css={footerStyle}>
-        {totalPages.map((page, i) => (
-          <Button
-            key={i}
-            onClick={() => setPage(i + 1)}
-            variation="noborder"
-            color="secondary"
-          >
-            {page}
-          </Button>
-        ))}
-      </footer>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <article>
+            {qna.map((v) => (
+              <QnA
+                key={v.qna_Number}
+                qna_Number={v.qna_Number}
+                qna_Writer={v.qna_Writer}
+                qna_Password={v.qna_Password}
+                qna_Subject={v.qna_Subject}
+                qna_Content={v.qna_Content}
+                qna_Date={v.qna_Date}
+                setQna={setQna}
+              />
+            ))}
+          </article>
+          <footer css={footerStyle}>
+            {totalPages.map((page, i) => (
+              <Button
+                key={i}
+                onClick={() => setPage(i + 1)}
+                variation="noborder"
+                color="secondary"
+              >
+                {page}
+              </Button>
+            ))}
+          </footer>
+        </Fragment>
+      )}
     </section>
   );
 };

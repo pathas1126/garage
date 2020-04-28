@@ -60,7 +60,7 @@ const QnADetail = ({
             setQna((prevQna) =>
               prevQna.filter((v) => v.qna_Number !== qna_Number)
             );
-            alert("댓글이 정상적으로 삭제되었습니다.");
+            alert("질문이 정상적으로 삭제되었습니다.");
           }
         })
         .catch((err) => {

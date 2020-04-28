@@ -28,7 +28,6 @@ const LoginContainer = () => {
     fetchData({ method: "POST", url: "/users/login", data: loginData })
       .then((res) => {
         const { data } = res;
-        console.log(res.data);
         if (data.success) {
           sessionStorage.setItem("user_Id", data.user_Id);
           sessionStorage.setItem("user_Name", data.user_Name);
