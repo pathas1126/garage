@@ -101,3 +101,7 @@ router.get("/qna/:qna_Number", controller.qna.reply.list);
 
 // QNA 댓글 삭제
 router.post("/qna/reply/:qna_Rnumber", controller.qna.reply.delete);
+
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/build", "index.html"));
+});
