@@ -103,5 +103,5 @@ router.get("/qna/:qna_Number", controller.qna.reply.list);
 router.post("/qna/reply/:qna_Rnumber", controller.qna.reply.delete);
 
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
