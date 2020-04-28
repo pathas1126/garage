@@ -122,6 +122,7 @@ const QnADetailStyle = css`
 
 const pStyle = css`
   width: 85%;
+  min-height: 5rem;
   margin: 0 auto;
   margin-bottom: 0.5rem;
   padding: 1rem;
