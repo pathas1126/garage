@@ -37,8 +37,8 @@ const Detail = (props) => {
       })
         .then((res) => {
           if (res.data === true) {
-            window.location.href = "/sales";
-            return alert("글이 삭제되었습니다.");
+            alert("글이 삭제되었습니다.");
+            return (window.location.href = "/sales");
           }
         })
         .catch((err) => {

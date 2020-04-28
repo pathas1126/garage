@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core";
 import { Button } from "../Button";
 import { fetchData } from "../../library";
+import { useState, useEffect } from "react";
 
 const QnAReply = ({
   qna_Name,
@@ -11,6 +12,14 @@ const QnAReply = ({
   qna_Rnumber,
   setQnaReplies,
 }) => {
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("admin")) {
+      setAdmin(JSON.parse(sessionStorage.getItem("admin")));
+    }
+  }, []);
+
   const onRemove = () => {
     if (window.confirm("정말로 삭제하시겠습니까?"))
       fetchData({ method: "POST", url: `/qna/reply/${qna_Rnumber}` })
@@ -35,7 +44,7 @@ const QnAReply = ({
       </article>
       <footer css={footerStyle}>
         <span>{qna_Reply_date}</span>
-        {(qna_Name === "관리자" || qna_Name === qna_Writer) && (
+        {admin ? (
           <Button
             variation="outline"
             onClick={onRemove}
@@ -44,6 +53,17 @@ const QnAReply = ({
           >
             삭제
           </Button>
+        ) : (
+          qna_Name === qna_Writer && (
+            <Button
+              variation="outline"
+              onClick={onRemove}
+              size="small"
+              color="warning"
+            >
+              삭제
+            </Button>
+          )
         )}
       </footer>
     </section>

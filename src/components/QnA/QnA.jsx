@@ -38,7 +38,7 @@ const QnA = ({
 
   useEffect(() => {
     if (sessionStorage.getItem("admin")) {
-      setAdmin(sessionStorage.getItem("admin"));
+      setAdmin(JSON.parse(sessionStorage.getItem("admin")));
     }
   }, []);
 
@@ -85,7 +85,7 @@ const QnA = ({
         </div>
       </header>
 
-      {(unlocked || admin) && (
+      {admin ? (
         <QnADetail
           qna_Content={qna_Content}
           setQna={setQna}
@@ -95,6 +95,18 @@ const QnA = ({
           qna_Subject={qna_Subject}
           qna_Date={qna_Date}
         />
+      ) : (
+        unlocked && (
+          <QnADetail
+            qna_Content={qna_Content}
+            setQna={setQna}
+            qna_Number={qna_Number}
+            qna_Writer={qna_Writer}
+            qna_Password={qna_Password}
+            qna_Subject={qna_Subject}
+            qna_Date={qna_Date}
+          />
+        )
       )}
     </section>
   );

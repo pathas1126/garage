@@ -129,20 +129,35 @@ module.exports = {
           .where("item_Number", "==", data)
           .get()
           .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              // 데이터에 포함된 이미지 파일 삭제
-              const { item_Picture } = doc.data();
-              if (item_Picture) {
-                fs.unlink(`public/${item_Picture}`, (err) => {
-                  if (err) throw err;
-                  console.log(`item_Picture was deleted`);
-                });
-              }
-              // DB에 있는 다큐먼트 삭제
-              doc.ref.delete();
+            if (querySnapshot.size > 0) {
+              querySnapshot.forEach((doc) => {
+                // 데이터에 포함된 이미지 파일 삭제
+                const { item_Picture } = doc.data();
+                if (item_Picture) {
+                  fs.unlink(`public/${item_Picture}`, (err) => {
+                    if (err) throw err;
+                    console.log(`item_Picture was deleted`);
+                  });
+                }
+                // DB에 있는 다큐먼트 삭제
+                doc.ref.delete();
 
-              callback(true);
-            });
+                // 종속 댓글 삭제
+                firestore
+                  .collection("item_reply")
+                  .where("item_Number", "==", data)
+                  .get()
+                  .then((querySnapshot) => {
+                    if (querySnapshot.size > 0) {
+                      querySnapshot.forEach((doc) => {
+                        doc.ref.delete();
+                      });
+                    }
+                  });
+
+                callback(true);
+              });
+            }
           })
           .catch((err) => {
             callback(false);
