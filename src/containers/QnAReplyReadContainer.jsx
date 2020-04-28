@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { QnAReply, Loader } from "../components";
 import { fetchData } from "../library";
 
@@ -8,26 +8,43 @@ const QnAReplyReadContainer = ({
   qna_Number,
   qna_Writer,
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const loaderRef = useRef();
 
   useEffect(() => {
-    setLoading(true);
-    fetchData({ method: "GET", url: `/qna/${qna_Number}` })
-      .then((res) => {
-        if (res.data) {
-          const resArr = res.data;
-          setQnaReplies((prevReplies) => prevReplies.concat(resArr));
-          setLoading(false);
+    const loaderCurrent = loaderRef.current;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          let timer;
+          if (!timer) {
+            timer = setTimeout(() => {
+              fetchData({ method: "GET", url: `/qna/${qna_Number}` })
+                .then((res) => {
+                  if (res.data) {
+                    const resArr = res.data;
+                    setQnaReplies((prevReplies) => prevReplies.concat(resArr));
+                    setLoading(false);
+                  }
+                })
+                .catch((err) => {
+                  throw err;
+                });
+            }, 500);
+          }
         }
-      })
-      .catch((err) => {
-        throw err;
       });
+    });
+    if (loaderCurrent) {
+      observer.observe(loaderCurrent);
+    }
+    return () => observer.unobserve(loaderCurrent);
   }, [qna_Number, setQnaReplies]);
+
   return (
     <>
       {loading ? (
-        <Loader />
+        <Loader loaderRef={loaderRef} />
       ) : (
         qnaReplies.map((reply) => (
           <QnAReply

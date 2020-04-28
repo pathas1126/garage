@@ -518,7 +518,7 @@ module.exports = {
               );
               callback(resArr);
             } else {
-              callback(false);
+              callback([]);
             }
           })
           .catch((err) => {
