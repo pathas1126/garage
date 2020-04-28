@@ -7,8 +7,8 @@ const bodyParser = require("body-parser");
 
 const router = require("./route");
 
-app.use(express.static(path.join(__dirname, "../build")));
 if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../build")));
 }
 
 app.use("/*", function (req, res, next) {
