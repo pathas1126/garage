@@ -126,6 +126,7 @@ const pStyle = css`
   margin: 0 auto;
   margin-bottom: 0.5rem;
   padding: 1rem;
+  background: rgba(222, 222, 222, 0.6);
   border: 1px solid #cdcdcd;
 `;
 

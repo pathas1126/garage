@@ -193,7 +193,6 @@ module.exports = {
       },
       list: (req, res) => {
         const { qna_Number } = req.params;
-        console.log(qna_Number);
         model.qna.reply.list(qna_Number, (result) => {
           if (result) res.send(result);
         });
