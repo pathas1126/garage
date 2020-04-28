@@ -30,8 +30,33 @@ const SignUpContainer = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    // 별명 2~12 자리 영문, 숫자, 한글
+    const nameCheck = /^[a-zA-Z0-9가-힣]{2,12}$/;
+
+    // 영문으로 시작하는 6자 이상 12자 이하문자열
+    const idCheck = /^[a-zA-Z]+[a-zA-Z0-9]{5,11}$/;
+
+    // 영문 & 숫자 조합 8~15자리
+    const pwdCheck = /^[a-zA-Z0-9]{8,15}$/;
+
+    // 이메일 체크
+    const eamilCheck = /^[a-zA-Z0-9]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/i;
+
+    if (!nameCheck.test(user_Name)) {
+      return alert("별명을 확인해 주세요!");
+    }
+    if (!idCheck.test(user_Id)) {
+      return alert("아이디를 확인해 주세요!");
+    }
+    if (!pwdCheck.test(user_Password)) {
+      return alert("비밀번호를 확인해 주세요!");
+    }
     if (user_Password !== user_Password_check)
       return alert("비밀번호가 맞지 않습니다.");
+    if (!eamilCheck.test(user_Email)) {
+      return alert("이메일을 확인해 주세요!");
+    }
 
     const data = signUp;
 
@@ -56,13 +81,13 @@ const SignUpContainer = () => {
             </tr>
             <tr>
               <td>
-                <Label htmlFor="user_Name">이름</Label>
+                <Label htmlFor="user_Name">별명</Label>
               </td>
               <td>
                 <Input
                   name="user_Name"
                   autoFocus={true}
-                  placeholder="별명을 입력해 주세요"
+                  placeholder="영문/숫자/한글 2~12자리"
                   value={user_Name}
                   onChange={setValues}
                   required={true}
@@ -76,7 +101,7 @@ const SignUpContainer = () => {
               <td>
                 <Input
                   name="user_Id"
-                  placeholder="아이디를 입력해 주세요"
+                  placeholder="영문으로 시작하는 6~12자리"
                   value={user_Id}
                   onChange={setValues}
                   required={true}
@@ -91,7 +116,7 @@ const SignUpContainer = () => {
               <td>
                 <Input
                   name="user_Password"
-                  placeholder="비밀번호를 입력해 주세요"
+                  placeholder="영문/숫자 조합 8~15자리"
                   type="password"
                   value={user_Password}
                   onChange={setValues}

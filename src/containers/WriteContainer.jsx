@@ -40,6 +40,11 @@ const WriteContainer = () => {
   const getImage = (e) => {
     const imgFile = e.target.files[0];
 
+    const imgCheck = /\.(jpg|png|gif|bmp)$/;
+
+    if (!imgCheck.test(imgFile.name)) {
+      return alert("이미지 파일이 아닙니다!");
+    }
     const formData = new FormData();
     formData.append("img", imgFile);
 
@@ -61,6 +66,39 @@ const WriteContainer = () => {
     e.preventDefault();
     const user_Id = sessionStorage.getItem("user_Id");
     const user_Name = sessionStorage.getItem("user_Name");
+
+    // 유효성 검사를 위한 정규식
+    // 주소: 공백을 포함한 한글
+    const locationCheck = /^[가-힣\s]+$/;
+
+    // 연락처: 9~11자리 숫자만 입력 가능
+    const contactCheck = /^[0-9]{9,11}$/;
+
+    // 금액: 숫자만 입력 가능
+    const priceCheck = /^[0-9]+$/;
+
+    // 제목 체크
+    if (item_Name.trim().length === 0) {
+      return alert("제목은 1글자 이상 입력해 주세요!");
+    }
+
+    // 주소는 한글만 입력
+    if (!locationCheck.test(deal_Location)) {
+      return alert("주소는 공백과 한글만 입력 가능합니다. ");
+    }
+    if (sales_KakaoId.trim().length === 0) {
+      return alert("카카오톡 ID를 입력해 주세요.");
+    }
+    if (!contactCheck.test(sales_Contact)) {
+      return alert("연락처는 숫자만 입력 가능합니다.");
+    }
+    if (!priceCheck.test(item_Price)) {
+      return alert("금액은 숫자만 입력 가능합니다.");
+    }
+    if (item_Detail.trim().length === 0) {
+      return alert("내용을 입력해주세요");
+    }
+
     const data = post;
 
     const date = new Date();
@@ -120,7 +158,7 @@ const WriteContainer = () => {
               <td>
                 <Input
                   name="deal_Location"
-                  placeholder="거래 위치를 입력해 주세요"
+                  placeholder="한글/공백 입력 가능"
                   value={deal_Location}
                   onChange={setValues}
                   required={true}
@@ -134,7 +172,7 @@ const WriteContainer = () => {
               <td>
                 <Input
                   name="sales_Contact"
-                  placeholder="연락처를 입력해 주세요"
+                  placeholder="숫자만 입력 가능"
                   value={sales_Contact}
                   onChange={setValues}
                   required={true}
@@ -162,7 +200,7 @@ const WriteContainer = () => {
                 <Input
                   name="item_Price"
                   value={item_Price}
-                  placeholder="상품 가격을 입력해 주세요"
+                  placeholder="숫자만 입력 가능합니다"
                   onChange={setValues}
                   required={true}
                   type="text"
@@ -211,6 +249,7 @@ const WriteContainer = () => {
           name="item_Detail"
           value={item_Detail}
           onChange={setValues}
+          placeholder="내용을 입력해 주세요"
         ></textarea>
         <Button width="90%" variation="outline" type="submit">
           작성 하기

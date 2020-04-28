@@ -23,6 +23,10 @@ const QnAReplyWriteContainer = ({ qna_Number, qna_Writer, setQnaReplies }) => {
   const writeReply = (e) => {
     e.preventDefault();
 
+    if (qna_Detail.trim().length === 0) {
+      return alert("내용을 입력해 주세요.");
+    }
+
     let qna_Name = qnaReplyData.qna_Name;
     if (sessionStorage.getItem("user_Name") === "관리자") {
       qna_Name = "관리자";

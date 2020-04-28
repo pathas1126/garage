@@ -27,6 +27,10 @@ const SalesReplyWriteContainer = ({ item_Number, setItem_Replies }) => {
       alert("로그인이 필요합니다.");
       return (window.location.href = "/login");
     }
+
+    if (replyData.item_Detail.trim().length === 0) {
+      return alert("내용을 입력해 주세요.");
+    }
     const date = new Date();
 
     const data = {

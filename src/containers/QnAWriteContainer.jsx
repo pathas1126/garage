@@ -38,6 +38,22 @@ const QnAWriteContainer = ({ qna, setQna }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    // 게시글 비밀번호 체크
+    const pwdCheck = /^[0-9]{4,6}$/;
+
+    if (qna_Subject.trim().length === 0) {
+      return alert("제목은 한 글자 이상 입력해 주세요.");
+    }
+    if (qna_Content.trim().length === 0) {
+      return alert("제목은 한 글자 이상 입력해 주세요.");
+    }
+    if (!pwdCheck.test(qna_Password)) {
+      return alert("비밀번호는 4~6자리 숫자만 가능합니다.");
+    }
+    if (qna_Writer.trim().length === 0) {
+      return alert("작성자를 입력해 주세요!");
+    }
+
     const date = new Date();
     const data = {
       ...qnaData,
@@ -88,6 +104,7 @@ const QnAWriteContainer = ({ qna, setQna }) => {
           name="qna_Subject"
           value={qna_Subject}
           onChange={getValues}
+          autoFocus
         />
         <div>
           <label htmlFor="qna_Writer">닉네임</label>
@@ -110,7 +127,7 @@ const QnAWriteContainer = ({ qna, setQna }) => {
             name="qna_Password"
             value={qna_Password}
             type="password"
-            placeholder="비밀번호를 입력하세요."
+            placeholder="4~6자리 숫자 입력"
             onChange={getValues}
           />
         </div>

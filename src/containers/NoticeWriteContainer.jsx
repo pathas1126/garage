@@ -39,6 +39,12 @@ const NoticeWriteContainer = ({ notice_Number }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (notice_Subject.trim().length === 0) {
+      return alert("제목은 한 글자 이상 입력해 주세요");
+    }
+    if (notice_Content.trim().length === 0) {
+      return alert("내용은 한 글자 이상 입력해 주세요");
+    }
     const date = new Date();
     fetchData({
       method: "POST",
