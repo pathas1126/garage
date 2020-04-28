@@ -6,7 +6,7 @@ const PageTemplate = ({ children }) => {
     <>
       <Header toggleModal />
       <Navigation />
-      <section style={{ height: "150vh", position: "relative" }}>
+      <section style={{ height: "100%", position: "relative" }}>
         {children}
       </section>
       <Footer />

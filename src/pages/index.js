@@ -1,7 +1,14 @@
-export { default as Main } from "./Main";
-export { default as Sales } from "./Sales";
-export { default as Enjoy } from "./Enjoy";
-export { default as QnA } from "./QnA";
+export { default as MainPage } from "./MainPage";
+export { default as SalesPage } from "./SalesPage";
+export { default as NoticePage } from "./NoticePage";
+export { default as NoticeWritePage } from "./NoticeWritePage";
+export { default as QnAPage } from "./QnAPage";
+export { default as LoginPage } from "./LoginPage";
+export { default as ContactPage } from "./ContactPage";
+export { default as DetailPage } from "./DetailPage";
+export { default as WritePage } from "./WritePage";
+export { default as SignUpPage } from "./SingUpPage";
+export { default as ItemUpdatePage } from "./ItemUpdatePage";
+
 export { default as MyPage } from "./MyPage";
-export { default as Login } from "./Login";
-export { default as Contact } from "./Contact";
+export { default as MyPagePosts } from "./MyPagePosts";

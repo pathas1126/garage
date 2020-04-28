@@ -8,3 +8,17 @@ export { PageTemplate } from "./PageTemplate";
 export { Button } from "./Button";
 export { Modal } from "./Modal";
 export { Input } from "./Input";
+export { Card } from "./Card";
+export { Loader } from "./Loader";
+export { Form } from "./Form";
+export { Select } from "./Select";
+export { NoticeRow } from "./NoticeRow";
+export { Reply } from "./Reply";
+export { ContactUs } from "./ContactUs";
+export { QnA } from "./QnA";
+export { QnADetail } from "./QnADetail";
+export { QnAReply } from "./QnAReply";
+
+// 페이지 컴포넌트
+export { Detail } from "./Detail";
+export { UserTable } from "./UserTable";
