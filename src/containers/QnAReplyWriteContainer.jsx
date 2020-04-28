@@ -47,6 +47,7 @@ const QnAReplyWriteContainer = ({ qna_Number, qna_Writer, setQnaReplies }) => {
       .then((res) => {
         if (res.data) {
           setQnaReplies((prevReplies) => [data].concat(prevReplies));
+          setQnaReplyData((prevData) => ({ ...prevData, qna_Detail: "" }));
           alert("댓글을 작성했습니다.");
         } else {
           alert("댓글을 작성할 수 없습니다.");

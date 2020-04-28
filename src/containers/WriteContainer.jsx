@@ -41,9 +41,10 @@ const WriteContainer = () => {
     const imgFile = e.target.files[0];
 
     const imgCheck = /\.(jpg|png|gif|bmp)$/;
-
-    if (!imgCheck.test(imgFile.name)) {
-      return alert("이미지 파일이 아닙니다!");
+    if (imgFile) {
+      if (!imgCheck.test(imgFile.name)) {
+        return alert("이미지 파일이 아닙니다!");
+      }
     }
     const formData = new FormData();
     formData.append("img", imgFile);

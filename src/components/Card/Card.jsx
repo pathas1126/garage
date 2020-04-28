@@ -40,7 +40,7 @@ const Card = ({
           </fieldset>
         </div>
         <div css={bottomStyle}>
-          <span>{item_Price}</span>
+          <span>{item_Price}원</span>
           <Link to={`/sales/detail/${item_Number}`}>
             <Button variation="noborder">더 보기</Button>
           </Link>

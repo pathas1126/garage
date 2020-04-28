@@ -23,7 +23,6 @@ router.get("/sales/items", controller.sales.items);
 router.post("/sales/write", controller.sales.write);
 
 router.post("/sales/image", upload.single("img"), (req, res, next) => {
-  console.log(req.file);
   res.send({
     fileName: req.file.filename,
   });
