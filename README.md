@@ -17,26 +17,20 @@ KIC 팀 프로젝트
 - Navigation
 - PageTemplate
 - Select
+- ...
 
-## Container
+## 사용 기술
 
-- CardContainer
-- DetailContainer
-- LoginContainer
-- SalesContainer
-- SalesHeaderContainer
-- SignUpContainer
-- WriteContainer
+- ReactJS
+- Express
+- Firebase_Firestore
+- Emotion-JS
+- Git/Github
+- EmailJS
+- Heroku
 
-## Page
 
-- DetailPage
-- LoginPage
-- SalesPage
-- SignUpPage
-- WritePage
+## 개선 사항
 
-## 앞으로 구현할 기능
-
-- SalesPage 글 검색, 수정, 삭제, 무한 스크롤로 구현할 예정
-- MyPage 회원 정보, 자기가 쓴 글 보기
+- 회원 ID/비밀번호 찾기
+- 이미지 파일 클라우드 DB로 저장
